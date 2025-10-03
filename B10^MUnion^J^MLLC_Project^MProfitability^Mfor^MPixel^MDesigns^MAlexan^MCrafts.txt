@@ -1,0 +1,29 @@
+"B10 Union, LLC"	
+Project Profitability for Pixel Design's Alexan Crafts	
+All Dates	
+	
+	Total
+Income	
+   Sales	"45,900.00  "
+Total Income	"$45,900.00  "
+Cost of Goods Sold	
+   Cost of Goods Sold	"11,037.48  "
+      Powder Coating	477.72  
+   Total Cost of Goods Sold	"$11,515.20  "
+   Wood Dept Supplies	919.55  
+Total Cost of Goods Sold	"$12,434.75  "
+Gross Profit	"$33,465.25  "
+Expenses	
+   Hourly Costs	"18,934.16  "
+   Car & Truck	
+      Fuel	113.86  
+   Total Car & Truck	$113.86  
+   Event Expenses	27.67  
+   Shipping and delivery expense	200.00  
+Total Expenses	"$19,275.69  "
+Net Operating Income	"$14,189.56  "
+Net Income	"$14,189.56  "
+	
+	
+	
+"Monday, Sep 08, 2025 10:13:28 AM GMT-7 - Cash Basis"	

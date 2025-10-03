@@ -1,0 +1,32 @@
+"B10 Union, LLC"	
+Project Profitability for Fogarty Finger Architecture's 1100 Peachtree Lobby	
+All Dates	
+	
+	Total
+Income	
+   Sales	"51,650.00  "
+Total Income	"$51,650.00  "
+Cost of Goods Sold	
+   Cost of Goods Sold	"6,748.45  "
+      Powder Coating	151.80  
+   Total Cost of Goods Sold	"$6,900.25  "
+   Finish Dept Supplies	19.90  
+   Freight & delivery - COS	2.25  
+   Metal Dept Supplies	488.16  
+   Supplies & Materials - COGS	42.62  
+      Job Materials	70.64  
+   Total Supplies & Materials - COGS	$113.26  
+   Wood Dept Supplies	776.38  
+Total Cost of Goods Sold	"$8,300.20  "
+Gross Profit	"$43,349.80  "
+Expenses	
+   Hourly Costs	"14,411.21  "
+   Freight & Delivery	322.14  
+   Shipping and delivery expense	499.66  
+Total Expenses	"$15,233.01  "
+Net Operating Income	"$28,116.79  "
+Net Income	"$28,116.79  "
+	
+	
+	
+"Monday, Sep 08, 2025 10:12:10 AM GMT-7 - Cash Basis"	

@@ -1,0 +1,101 @@
+job_id,customer_name,estimated_labor_hours,wood_species,finishing_complexity,estimated_machine_hours,length_in,width_in,height_in,quantity,delivery_miles,installation_required,hardware_cost,material_grade,waste_factor_pct,finish_material_cost,overhead_allocation,job_complexity_score,risk_adjustment_pct,estimator_notes,quote_price
+1,Customer_1,32,Maple,5,10,95,32,94,11,10,No,99,Economy,7,151,230,5,1,standard job,322379
+2,Customer_2,33,Oak,5,5,25,32,44,12,21,Yes,235,Economy,16,474,158,2,15,fragile,131023
+3,Customer_3,19,Pine,1,2,78,14,62,7,20,No,166,Economy,17,387,188,4,13,large order,205541
+4,Customer_4,12,Oak,4,9,76,13,95,15,6,Yes,263,Premium,14,34,305,1,3,standard job,460837
+5,Customer_5,7,Pine,4,1,29,15,65,18,25,No,161,Premium,9,445,369,4,8,tight space,483505
+6,Customer_6,24,MDF,5,1,76,35,37,13,40,No,14,Standard,12,64,444,1,7,upscale client,456308
+7,Customer_7,11,Pine,3,7,86,22,92,8,34,Yes,288,Standard,4,489,330,2,8,fragile,183823
+8,Customer_8,10,Oak,5,8,95,23,45,1,47,Yes,98,Economy,11,359,313,3,2,tight space,202164
+9,Customer_9,38,Maple,2,4,70,25,14,1,4,No,254,Economy,13,358,382,1,14,upscale client,218626
+10,Customer_10,29,MDF,5,9,100,43,63,4,29,Yes,230,Premium,12,142,270,5,3,upscale client,449536
+11,Customer_11,35,Oak,5,6,82,33,39,2,41,No,61,Standard,20,133,383,4,11,tight space,200735
+12,Customer_12,23,Oak,1,10,115,36,73,1,0,No,282,Economy,19,460,332,3,6,large order,451769
+13,Customer_13,11,Oak,3,10,32,48,62,10,43,Yes,159,Premium,8,179,212,1,9,large order,193575
+14,Customer_14,15,MDF,2,6,25,14,67,17,48,Yes,129,Economy,4,223,324,1,2,standard job,178289
+15,Customer_15,5,Maple,4,4,67,37,43,6,31,No,202,Standard,16,254,393,5,3,large order,106581
+16,Customer_16,9,Pine,5,5,34,27,84,6,15,No,258,Standard,19,251,445,3,14,standard job,238214
+17,Customer_17,23,Maple,1,6,75,44,51,7,17,Yes,266,Economy,17,150,397,3,6,tight space,309487
+18,Customer_18,19,Oak,5,9,83,13,12,16,11,Yes,36,Economy,8,232,198,3,15,fragile,445123
+19,Customer_19,6,Oak,1,3,47,44,35,20,10,No,103,Premium,19,253,326,1,2,tight space,133772
+20,Customer_20,32,MDF,5,1,105,13,65,3,15,Yes,168,Economy,3,160,167,1,13,tight space,354056
+21,Customer_21,23,Pine,4,7,31,18,78,17,32,Yes,21,Economy,13,157,137,5,2,tight space,338857
+22,Customer_22,11,Pine,1,10,50,45,32,1,27,No,146,Economy,3,34,291,1,15,large order,467460
+23,Customer_23,31,Pine,5,4,29,46,48,17,45,Yes,94,Economy,2,187,215,5,4,large order,494995
+24,Customer_24,26,Oak,2,0,90,29,36,10,30,Yes,173,Standard,17,287,441,2,14,large order,82574
+25,Customer_25,5,Oak,5,9,40,44,20,11,47,Yes,169,Standard,2,305,112,4,9,upscale client,249210
+26,Customer_26,39,Pine,3,3,88,19,27,14,11,Yes,142,Economy,1,321,387,3,8,standard job,53421
+27,Customer_27,25,Oak,3,9,81,33,60,20,41,Yes,100,Standard,0,263,152,4,11,large order,180319
+28,Customer_28,8,MDF,4,6,91,17,58,3,39,No,143,Standard,12,369,223,2,13,standard job,223366
+29,Customer_29,20,Oak,5,7,86,30,69,5,25,Yes,278,Standard,8,395,228,2,9,fragile,279540
+30,Customer_30,37,MDF,5,5,71,36,12,16,38,No,277,Economy,2,75,253,3,4,standard job,204361
+31,Customer_31,32,MDF,4,4,70,41,73,20,4,Yes,217,Premium,15,340,138,4,0,tight space,319217
+32,Customer_32,33,Maple,4,4,46,21,80,4,33,No,222,Premium,9,249,246,2,15,tight space,191732
+33,Customer_33,8,Pine,4,3,39,35,91,2,48,No,159,Premium,19,151,495,2,2,large order,428911
+34,Customer_34,36,Maple,1,0,84,48,23,3,0,Yes,167,Standard,9,42,143,5,12,large order,479743
+35,Customer_35,34,Pine,2,1,58,34,92,8,28,No,89,Premium,1,114,204,4,9,standard job,352232
+36,Customer_36,14,Pine,5,7,59,36,32,4,9,No,191,Economy,2,176,198,4,1,standard job,71140
+37,Customer_37,35,Oak,5,7,46,43,48,12,48,No,278,Premium,2,360,385,1,0,upscale client,14897
+38,Customer_38,23,MDF,4,8,109,24,70,19,48,No,232,Economy,18,75,364,4,13,large order,52434
+39,Customer_39,22,MDF,4,9,39,16,23,20,20,No,52,Economy,15,56,138,5,4,fragile,153117
+40,Customer_40,17,Maple,4,9,28,46,86,18,46,No,8,Premium,9,441,500,5,5,standard job,2042
+41,Customer_41,16,Oak,5,7,65,20,61,2,4,Yes,164,Standard,5,338,235,5,0,standard job,477001
+42,Customer_42,20,MDF,3,6,112,15,47,6,30,Yes,181,Standard,6,90,301,2,2,large order,487962
+43,Customer_43,6,MDF,1,1,115,31,83,9,38,No,189,Economy,16,408,411,1,5,standard job,243304
+44,Customer_44,9,Pine,5,9,67,43,56,15,20,No,202,Premium,4,163,326,3,3,custom jig,114565
+45,Customer_45,17,MDF,2,0,77,14,27,11,11,Yes,223,Premium,15,455,457,4,7,custom jig,66703
+46,Customer_46,11,Maple,4,9,115,47,19,18,27,No,40,Economy,3,191,244,1,0,custom jig,317928
+47,Customer_47,23,Oak,2,2,29,29,80,15,24,No,9,Economy,17,250,464,5,6,standard job,1515
+48,Customer_48,36,MDF,2,5,88,29,60,11,20,No,62,Economy,16,460,197,1,2,custom jig,271346
+49,Customer_49,4,Oak,5,4,78,17,92,5,30,Yes,258,Standard,20,22,152,5,9,tight space,163773
+50,Customer_50,22,MDF,3,0,108,25,84,14,0,No,172,Premium,12,259,468,2,11,tight space,138811
+51,Customer_51,29,Oak,4,9,57,14,61,12,0,Yes,221,Standard,16,111,354,5,4,upscale client,340353
+52,Customer_52,5,Pine,2,10,74,45,49,18,33,No,285,Standard,14,346,407,1,5,upscale client,450516
+53,Customer_53,27,MDF,1,6,74,28,16,4,9,Yes,272,Economy,19,471,168,2,5,upscale client,277032
+54,Customer_54,5,Pine,3,10,66,22,34,16,30,No,7,Premium,3,359,487,1,2,standard job,215379
+55,Customer_55,6,Maple,5,10,116,43,61,19,18,No,4,Premium,17,91,269,5,5,tight space,341896
+56,Customer_56,9,MDF,2,0,28,23,57,2,48,No,300,Economy,8,281,348,1,5,custom jig,404194
+57,Customer_57,33,Pine,1,10,86,28,37,4,0,Yes,252,Standard,19,206,402,2,11,large order,74186
+58,Customer_58,17,Maple,3,7,25,37,25,19,6,No,110,Standard,13,362,338,4,12,standard job,118533
+59,Customer_59,38,Pine,1,2,38,36,39,10,38,Yes,272,Economy,6,85,225,4,8,standard job,105092
+60,Customer_60,16,MDF,5,3,48,15,21,3,40,Yes,145,Standard,14,227,210,2,14,standard job,336123
+61,Customer_61,22,Pine,2,9,64,48,17,20,25,Yes,228,Standard,0,436,249,5,5,standard job,2105
+62,Customer_62,7,Oak,3,10,85,41,35,9,2,No,30,Economy,7,228,135,2,3,tight space,473295
+63,Customer_63,14,Pine,3,3,102,17,62,2,14,No,25,Economy,18,172,399,5,5,fragile,423821
+64,Customer_64,7,Maple,1,2,107,44,31,17,11,No,89,Premium,13,319,137,5,13,tight space,283262
+65,Customer_65,39,Maple,5,10,26,44,17,18,9,No,137,Standard,11,385,112,2,3,large order,9012
+66,Customer_66,40,Maple,3,8,40,20,86,15,23,No,93,Standard,16,68,417,4,11,large order,305573
+67,Customer_67,17,Oak,3,4,98,20,45,12,34,No,0,Economy,7,319,159,5,7,custom jig,258302
+68,Customer_68,40,Pine,2,2,108,48,16,19,13,Yes,61,Economy,3,88,336,2,8,custom jig,305947
+69,Customer_69,11,MDF,1,6,37,43,62,6,32,Yes,152,Premium,16,224,408,3,6,standard job,330150
+70,Customer_70,9,Maple,4,5,90,18,62,8,41,Yes,14,Economy,14,156,388,4,13,standard job,403162
+71,Customer_71,30,Pine,2,3,52,44,38,1,3,Yes,9,Premium,4,122,429,1,5,fragile,388377
+72,Customer_72,16,Oak,5,3,111,26,40,8,4,No,46,Economy,3,331,272,2,10,large order,148050
+73,Customer_73,39,Maple,2,3,49,38,80,20,10,No,37,Economy,5,199,122,2,13,large order,353118
+74,Customer_74,15,Maple,4,9,36,29,71,11,11,No,132,Standard,4,327,226,2,0,standard job,196882
+75,Customer_75,12,Maple,3,5,74,40,89,8,40,Yes,256,Standard,13,100,445,4,5,fragile,380362
+76,Customer_76,4,Oak,5,5,78,26,32,15,8,Yes,136,Premium,9,435,412,5,9,tight space,13724
+77,Customer_77,38,Maple,2,3,48,37,86,6,1,Yes,16,Economy,10,442,463,3,2,large order,247465
+78,Customer_78,27,Maple,3,8,94,17,44,17,28,No,149,Standard,17,468,148,1,3,tight space,20316
+79,Customer_79,23,Pine,1,5,109,39,74,8,48,No,223,Economy,12,477,314,3,10,custom jig,427435
+80,Customer_80,22,Oak,3,0,68,40,41,16,39,Yes,17,Economy,0,77,470,2,1,upscale client,138217
+81,Customer_81,31,Maple,3,0,117,15,12,8,28,No,287,Standard,9,457,465,2,11,custom jig,389588
+82,Customer_82,26,Pine,1,6,115,43,61,7,28,No,246,Premium,2,471,354,5,7,fragile,450089
+83,Customer_83,40,Pine,3,2,74,44,19,2,34,Yes,164,Economy,20,397,322,2,6,custom jig,267069
+84,Customer_84,10,MDF,4,0,46,32,30,16,18,No,284,Economy,17,1,484,5,3,custom jig,217086
+85,Customer_85,5,Maple,1,2,110,23,31,5,36,Yes,225,Standard,20,427,454,4,9,tight space,240969
+86,Customer_86,27,Maple,1,0,97,41,70,14,22,No,114,Economy,16,13,108,2,12,upscale client,362252
+87,Customer_87,12,Maple,5,5,45,15,37,13,33,No,74,Premium,5,145,227,5,9,fragile,431959
+88,Customer_88,37,Pine,5,0,60,36,87,10,21,Yes,26,Standard,5,218,267,2,11,upscale client,178400
+89,Customer_89,10,Oak,4,9,68,28,37,14,1,No,192,Economy,18,180,391,3,9,tight space,53776
+90,Customer_90,24,MDF,3,10,63,22,47,17,38,Yes,97,Economy,14,151,345,5,7,fragile,415508
+91,Customer_91,39,MDF,2,3,106,46,92,13,42,No,200,Standard,1,500,172,1,7,tight space,169476
+92,Customer_92,4,MDF,2,8,84,36,50,3,2,Yes,228,Premium,11,171,201,2,11,tight space,51974
+93,Customer_93,40,Oak,4,10,72,28,85,17,46,Yes,79,Economy,18,263,248,1,6,tight space,448472
+94,Customer_94,19,MDF,3,5,95,36,93,12,14,Yes,25,Premium,14,287,365,1,6,fragile,88333
+95,Customer_95,24,Pine,3,5,30,25,90,7,8,Yes,175,Economy,7,497,414,5,1,fragile,298706
+96,Customer_96,33,Maple,1,3,62,46,29,10,38,No,13,Economy,2,107,287,5,1,upscale client,475766
+97,Customer_97,40,Oak,1,10,63,37,66,12,38,No,3,Economy,12,209,260,5,9,large order,337503
+98,Customer_98,5,Oak,2,6,65,45,41,13,12,Yes,95,Standard,2,378,138,4,12,large order,423345
+99,Customer_99,32,Oak,1,4,80,27,67,12,46,Yes,265,Economy,6,339,488,1,13,tight space,217252
+100,Customer_100,6,Oak,1,7,53,15,29,5,24,Yes,72,Economy,14,304,476,4,11,large order,43501

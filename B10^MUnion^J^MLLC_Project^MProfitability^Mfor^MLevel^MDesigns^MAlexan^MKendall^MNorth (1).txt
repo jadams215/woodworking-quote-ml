@@ -1,0 +1,27 @@
+"B10 Union, LLC"	
+Project Profitability for Level Design's Alexan Kendall North	
+All Dates	
+	
+	Total
+Income	
+   Sales	"9,000.00  "
+      Upholstery	"14,000.00  "
+   Total Sales	"$23,000.00  "
+Total Income	"$23,000.00  "
+Cost of Goods Sold	
+   Cost of Goods Sold	913.48  
+      Powder Coating	160.74  
+   Total Cost of Goods Sold	"$1,074.22  "
+   Finish Dept Supplies	"1,040.30  "
+   Wood Dept Supplies	242.49  
+Total Cost of Goods Sold	"$2,357.01  "
+Gross Profit	"$20,642.99  "
+Expenses	
+   Hourly Costs	"6,629.96  "
+Total Expenses	"$6,629.96  "
+Net Operating Income	"$14,013.03  "
+Net Income	"$14,013.03  "
+	
+	
+	
+"Monday, Sep 08, 2025 10:13:54 AM GMT-7 - Cash Basis"	

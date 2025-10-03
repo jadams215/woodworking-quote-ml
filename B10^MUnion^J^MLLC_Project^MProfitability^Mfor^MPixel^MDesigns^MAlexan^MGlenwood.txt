@@ -1,0 +1,28 @@
+"B10 Union, LLC"	
+Project Profitability for Pixel Design's Alexan Glenwood	
+All Dates	
+	
+	Total
+Income	
+   Sales	"62,000.00  "
+Total Income	"$62,000.00  "
+Cost of Goods Sold	
+   Cost of Goods Sold	"8,946.52  "
+      Powder Coating	855.97  
+   Total Cost of Goods Sold	"$9,802.49  "
+   Upholstery	"4,596.51  "
+   Wood Dept Supplies	"1,176.37  "
+Total Cost of Goods Sold	"$15,575.37  "
+Gross Profit	"$46,424.63  "
+Expenses	
+   Hourly Costs	"24,305.36  "
+   Event Expenses	33.60  
+   Freight & Delivery	639.25  
+   Shipping and delivery expense	245.07  
+Total Expenses	"$25,223.28  "
+Net Operating Income	"$21,201.35  "
+Net Income	"$21,201.35  "
+	
+	
+	
+"Monday, Sep 08, 2025 10:12:58 AM GMT-7 - Cash Basis"	

@@ -1,0 +1,6 @@
+job_id,customer_name,estimated_labor_hours,wood_species,finishing_complexity,estimated_machine_hours,length_in,width_in,height_in,quantity,delivery_miles,installation_required,hardware_cost,material_grade,waste_factor_pct,finish_material_cost,overhead_allocation,job_complexity_score,risk_adjustment_pct,estimator_notes,quote_price
+1,Smith,12,Maple,4,3,80,24,36,2,15,Yes,45,Premium,10,100,200,3,5,"tight space, custom jig",2800
+2,Johnson,8,Oak,2,1,60,20,30,1,5,No,20,Standard,5,60,150,2,0,standard job,1200
+3,Lee,20,MDF,5,4,100,30,40,4,25,Yes,75,Economy,12,150,250,4,10,"large order, fragile handling",5200
+4,Patel,10,Pine,3,2,70,22,32,3,8,No,30,Standard,8,90,180,2,0,straightforward build,1800
+5,Garcia,15,Oak,4,2,90,28,34,2,12,Yes,55,Premium,9,120,220,3,5,"upscale client, tight deadline",3400
