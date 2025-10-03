@@ -1,0 +1,13 @@
+# Ignore CatBoost training logs
+catboost_info/
+
+# Ignore saved models
+*.cbm
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environments (if you make one)
+venv/
