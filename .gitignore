@@ -1,13 +1,45 @@
 # Ignore CatBoost training logs
 catboost_info/
 
-# Ignore saved models
+# Ignore saved models (large files)
 *.cbm
+models/ml_adjuster/
 
 # Ignore Python cache files
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+.Python
 
-# Ignore virtual environments (if you make one)
+# Ignore virtual environments
 venv/
+env/
+.venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+*.egg-info/
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local config overrides
+config/local_*.json

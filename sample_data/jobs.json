@@ -1,0 +1,405 @@
+[
+  {
+    "job_id": "job_1001",
+    "job_name": "Custom Reception Desk",
+    "customer": "Northlake Hotel",
+    "target_ship_date": "2026-02-20",
+    "tasks": [
+      {
+        "task_id": "job_1001_material_prep",
+        "job_id": "job_1001",
+        "name": "Material Prep",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-03",
+        "due_date": "2026-02-20",
+        "precedence": [],
+        "base_hours": 8
+      },
+      {
+        "task_id": "job_1001_cutting",
+        "job_id": "job_1001",
+        "name": "Cutting",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-03",
+        "due_date": "2026-02-20",
+        "precedence": ["job_1001_material_prep"],
+        "base_hours": 12
+      },
+      {
+        "task_id": "job_1001_cnc",
+        "job_id": "job_1001",
+        "name": "CNC",
+        "required_skill": "cnc_setup_operation",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-04",
+        "due_date": "2026-02-20",
+        "precedence": ["job_1001_cutting"],
+        "base_hours": 10
+      },
+      {
+        "task_id": "job_1001_assembly",
+        "job_id": "job_1001",
+        "name": "Assembly",
+        "required_skill": "assembly_glueups",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-05",
+        "due_date": "2026-02-20",
+        "precedence": ["job_1001_cnc"],
+        "base_hours": 16
+      },
+      {
+        "task_id": "job_1001_sanding",
+        "job_id": "job_1001",
+        "name": "Sanding",
+        "required_skill": "sanding_prep",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-06",
+        "due_date": "2026-02-20",
+        "precedence": ["job_1001_assembly"],
+        "base_hours": 12
+      },
+      {
+        "task_id": "job_1001_finishing",
+        "job_id": "job_1001",
+        "name": "Finishing",
+        "required_skill": "finishing",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-08",
+        "due_date": "2026-02-20",
+        "precedence": ["job_1001_sanding"],
+        "base_hours": 14
+      },
+      {
+        "task_id": "job_1001_install",
+        "job_id": "job_1001",
+        "name": "Install",
+        "required_skill": "install_on_site",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-15",
+        "due_date": "2026-02-20",
+        "precedence": ["job_1001_finishing"],
+        "base_hours": 10
+      },
+      {
+        "task_id": "job_1001_packing",
+        "job_id": "job_1001",
+        "name": "Packing",
+        "required_skill": "packing_crating",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-16",
+        "due_date": "2026-02-20",
+        "precedence": ["job_1001_finishing"],
+        "base_hours": 4
+      }
+    ]
+  },
+  {
+    "job_id": "job_1002",
+    "job_name": "Boutique Wall Shelving",
+    "customer": "Elm Street Retail",
+    "target_ship_date": "2026-02-14",
+    "tasks": [
+      {
+        "task_id": "job_1002_material_prep",
+        "job_id": "job_1002",
+        "name": "Material Prep",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-03",
+        "due_date": "2026-02-14",
+        "precedence": [],
+        "base_hours": 6
+      },
+      {
+        "task_id": "job_1002_cutting",
+        "job_id": "job_1002",
+        "name": "Cutting",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-04",
+        "due_date": "2026-02-14",
+        "precedence": ["job_1002_material_prep"],
+        "base_hours": 8
+      },
+      {
+        "task_id": "job_1002_joinery",
+        "job_id": "job_1002",
+        "name": "Joinery",
+        "required_skill": "joinery",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-05",
+        "due_date": "2026-02-14",
+        "precedence": ["job_1002_cutting"],
+        "base_hours": 10
+      },
+      {
+        "task_id": "job_1002_assembly",
+        "job_id": "job_1002",
+        "name": "Assembly",
+        "required_skill": "assembly_glueups",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-06",
+        "due_date": "2026-02-14",
+        "precedence": ["job_1002_joinery"],
+        "base_hours": 8
+      },
+      {
+        "task_id": "job_1002_sanding",
+        "job_id": "job_1002",
+        "name": "Sanding",
+        "required_skill": "sanding_prep",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-07",
+        "due_date": "2026-02-14",
+        "precedence": ["job_1002_assembly"],
+        "base_hours": 6
+      },
+      {
+        "task_id": "job_1002_finishing",
+        "job_id": "job_1002",
+        "name": "Finishing",
+        "required_skill": "finishing",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-08",
+        "due_date": "2026-02-14",
+        "precedence": ["job_1002_sanding"],
+        "base_hours": 7
+      },
+      {
+        "task_id": "job_1002_packing",
+        "job_id": "job_1002",
+        "name": "Packing",
+        "required_skill": "packing_crating",
+        "complexity_level": "low",
+        "earliest_start_date": "2026-02-10",
+        "due_date": "2026-02-14",
+        "precedence": ["job_1002_finishing"],
+        "base_hours": 3
+      }
+    ]
+  },
+  {
+    "job_id": "job_1003",
+    "job_name": "Conference Table Set",
+    "customer": "Pine Harbor Offices",
+    "target_ship_date": "2026-03-01",
+    "tasks": [
+      {
+        "task_id": "job_1003_material_prep",
+        "job_id": "job_1003",
+        "name": "Material Prep",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-10",
+        "due_date": "2026-03-01",
+        "precedence": [],
+        "base_hours": 10
+      },
+      {
+        "task_id": "job_1003_cutting",
+        "job_id": "job_1003",
+        "name": "Cutting",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-11",
+        "due_date": "2026-03-01",
+        "precedence": ["job_1003_material_prep"],
+        "base_hours": 12
+      },
+      {
+        "task_id": "job_1003_assembly",
+        "job_id": "job_1003",
+        "name": "Assembly",
+        "required_skill": "assembly_glueups",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-13",
+        "due_date": "2026-03-01",
+        "precedence": ["job_1003_cutting"],
+        "base_hours": 18
+      },
+      {
+        "task_id": "job_1003_sanding",
+        "job_id": "job_1003",
+        "name": "Sanding",
+        "required_skill": "sanding_prep",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-16",
+        "due_date": "2026-03-01",
+        "precedence": ["job_1003_assembly"],
+        "base_hours": 10
+      },
+      {
+        "task_id": "job_1003_finishing",
+        "job_id": "job_1003",
+        "name": "Finishing",
+        "required_skill": "finishing",
+        "complexity_level": "med",
+        "earliest_start_date": "2026-02-18",
+        "due_date": "2026-03-01",
+        "precedence": ["job_1003_sanding"],
+        "base_hours": 12
+      },
+      {
+        "task_id": "job_1003_packing",
+        "job_id": "job_1003",
+        "name": "Packing",
+        "required_skill": "packing_crating",
+        "complexity_level": "low",
+        "earliest_start_date": "2026-02-25",
+        "due_date": "2026-03-01",
+        "precedence": ["job_1003_finishing"],
+        "base_hours": 4
+      }
+    ]
+  },
+  {
+    "job_id": "job_1004",
+    "job_name": "Lobby Built-ins",
+    "customer": "Horizon Apartments",
+    "target_ship_date": "2026-02-25",
+    "tasks": [
+      {
+        "task_id": "job_1004_material_prep",
+        "job_id": "job_1004",
+        "name": "Material Prep",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-06",
+        "due_date": "2026-02-25",
+        "precedence": [],
+        "base_hours": 12
+      },
+      {
+        "task_id": "job_1004_cnc",
+        "job_id": "job_1004",
+        "name": "CNC",
+        "required_skill": "cnc_setup_operation",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-07",
+        "due_date": "2026-02-25",
+        "precedence": ["job_1004_material_prep"],
+        "base_hours": 14
+      },
+      {
+        "task_id": "job_1004_assembly",
+        "job_id": "job_1004",
+        "name": "Assembly",
+        "required_skill": "assembly_glueups",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-10",
+        "due_date": "2026-02-25",
+        "precedence": ["job_1004_cnc"],
+        "base_hours": 20
+      },
+      {
+        "task_id": "job_1004_sanding",
+        "job_id": "job_1004",
+        "name": "Sanding",
+        "required_skill": "sanding_prep",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-12",
+        "due_date": "2026-02-25",
+        "precedence": ["job_1004_assembly"],
+        "base_hours": 12
+      },
+      {
+        "task_id": "job_1004_finishing",
+        "job_id": "job_1004",
+        "name": "Finishing",
+        "required_skill": "finishing",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-14",
+        "due_date": "2026-02-25",
+        "precedence": ["job_1004_sanding"],
+        "base_hours": 16
+      },
+      {
+        "task_id": "job_1004_install",
+        "job_id": "job_1004",
+        "name": "Install",
+        "required_skill": "install_on_site",
+        "complexity_level": "high",
+        "earliest_start_date": "2026-02-20",
+        "due_date": "2026-02-25",
+        "precedence": ["job_1004_finishing"],
+        "base_hours": 12
+      }
+    ]
+  },
+  {
+    "job_id": "job_1005",
+    "job_name": "Cafe Counter Refresh",
+    "customer": "Willow Cafe",
+    "target_ship_date": "2026-02-12",
+    "tasks": [
+      {
+        "task_id": "job_1005_material_prep",
+        "job_id": "job_1005",
+        "name": "Material Prep",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "low",
+        "earliest_start_date": "2026-02-03",
+        "due_date": "2026-02-12",
+        "precedence": [],
+        "base_hours": 4
+      },
+      {
+        "task_id": "job_1005_cutting",
+        "job_id": "job_1005",
+        "name": "Cutting",
+        "required_skill": "rough_cutting_milling",
+        "complexity_level": "low",
+        "earliest_start_date": "2026-02-04",
+        "due_date": "2026-02-12",
+        "precedence": ["job_1005_material_prep"],
+        "base_hours": 5
+      },
+      {
+        "task_id": "job_1005_assembly",
+        "job_id": "job_1005",
+        "name": "Assembly",
+        "required_skill": "assembly_glueups",
+        "complexity_level": "low",
+        "earliest_start_date": "2026-02-05",
+        "due_date": "2026-02-12",
+        "precedence": ["job_1005_cutting"],
+        "base_hours": 6
+      },
+      {
+        "task_id": "job_1005_sanding",
+        "job_id": "job_1005",
+        "name": "Sanding",
+        "required_skill": "sanding_prep",
+        "complexity_level": "low",
+        "earliest_start_date": "2026-02-06",
+        "due_date": "2026-02-12",
+        "precedence": ["job_1005_assembly"],
+        "base_hours": 4
+      },
+      {
+        "task_id": "job_1005_finishing",
+        "job_id": "job_1005",
+        "name": "Finishing",
+        "required_skill": "finishing",
+        "complexity_level": "low",
+        "earliest_start_date": "2026-02-07",
+        "due_date": "2026-02-12",
+        "precedence": ["job_1005_sanding"],
+        "base_hours": 5
+      },
+      {
+        "task_id": "job_1005_packing",
+        "job_id": "job_1005",
+        "name": "Packing",
+        "required_skill": "packing_crating",
+        "complexity_level": "low",
+        "earliest_start_date": "2026-02-09",
+        "due_date": "2026-02-12",
+        "precedence": ["job_1005_finishing"],
+        "base_hours": 2
+      }
+    ]
+  }
+]

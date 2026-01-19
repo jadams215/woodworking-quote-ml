@@ -1,0 +1,487 @@
+[
+  {
+    "employee_id": "emp_cnc",
+    "name": "Alex Rivera",
+    "role_title": "CNC Specialist",
+    "employment_type": "full_time",
+    "hourly_rate": 38.0,
+    "availability": {
+      "hours_per_week": 40,
+      "days_available": ["mon", "tue", "wed", "thu", "fri"]
+    },
+    "constraints": ["no_weekends"],
+    "skills": {
+      "rough_cutting_milling": {
+        "proficiency_score": 3,
+        "speed_multiplier": 1.0,
+        "quality_risk": "med",
+        "experience_examples": "Panel breakdowns on saw."
+      },
+      "joinery": {
+        "proficiency_score": 3,
+        "speed_multiplier": 1.0,
+        "quality_risk": "med",
+        "experience_examples": "Dados and tenons on CNC."
+      },
+      "assembly_glueups": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.1,
+        "quality_risk": "med",
+        "experience_examples": "Limited case assembly."
+      },
+      "sanding_prep": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Basic prep only."
+      },
+      "finishing": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Avoids spray work."
+      },
+      "cnc_setup_operation": {
+        "proficiency_score": 5,
+        "speed_multiplier": 0.8,
+        "quality_risk": "low",
+        "experience_examples": "Nested sheets, vacuum table."
+      },
+      "cad_cam": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Toolpath tuning."
+      },
+      "install_on_site": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Limited installs."
+      },
+      "packing_crating": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.1,
+        "quality_risk": "med",
+        "experience_examples": "Simple crating."
+      },
+      "troubleshooting_rework": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Post-processor fixes."
+      }
+    },
+    "experience": {
+      "top_job_types": ["tables", "built_ins", "retail fixtures"],
+      "max_complexity": "high",
+      "max_complexity_examples": "Multi-part curved fixture sets.",
+      "materials_familiarity": ["ply", "mdf", "maple"],
+      "finish_familiarity": ["lacquer"],
+      "cnc_experience": {
+        "years": 6,
+        "typical_ops": ["nested based manufacturing", "pockets", "drilling"],
+        "comfort_level": 5
+      }
+    },
+    "weaknesses": {
+      "tasks_avoid": ["finishing", "full installs"],
+      "tasks_best": ["cnc", "cad_cam"],
+      "error_modes": ["toolpath collisions on tight clearances"],
+      "training_needs": ["spray finishing basics"]
+    },
+    "reliability": {
+      "rework_rate_pct": 2.0,
+      "punctuality_rating": 5,
+      "supervision_need": "none"
+    }
+  },
+  {
+    "employee_id": "emp_finish",
+    "name": "Maya Chen",
+    "role_title": "Finisher",
+    "employment_type": "full_time",
+    "hourly_rate": 30.0,
+    "availability": {
+      "hours_per_week": 38,
+      "days_available": ["mon", "tue", "wed", "thu", "fri"]
+    },
+    "constraints": ["no_overtime"],
+    "skills": {
+      "rough_cutting_milling": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Basic saw work."
+      },
+      "joinery": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Assist only."
+      },
+      "assembly_glueups": {
+        "proficiency_score": 3,
+        "speed_multiplier": 1.0,
+        "quality_risk": "med",
+        "experience_examples": "Cabinet carcasses."
+      },
+      "sanding_prep": {
+        "proficiency_score": 5,
+        "speed_multiplier": 0.8,
+        "quality_risk": "low",
+        "experience_examples": "High-end prep."
+      },
+      "finishing": {
+        "proficiency_score": 5,
+        "speed_multiplier": 0.8,
+        "quality_risk": "low",
+        "experience_examples": "Spray booth, stains, oils."
+      },
+      "cnc_setup_operation": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Not primary."
+      },
+      "cad_cam": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Not primary."
+      },
+      "install_on_site": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.1,
+        "quality_risk": "med",
+        "experience_examples": "Limited installs."
+      },
+      "packing_crating": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Protective packing."
+      },
+      "troubleshooting_rework": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Fix finish defects."
+      }
+    },
+    "experience": {
+      "top_job_types": ["cabinets", "tables", "retail fixtures"],
+      "max_complexity": "high",
+      "max_complexity_examples": "High-gloss hotel casework.",
+      "materials_familiarity": ["walnut", "maple", "ply", "mdf"],
+      "finish_familiarity": ["lacquer", "poly", "oil"],
+      "cnc_experience": {
+        "years": 0,
+        "typical_ops": [],
+        "comfort_level": 1
+      }
+    },
+    "weaknesses": {
+      "tasks_avoid": ["cnc", "cad_cam"],
+      "tasks_best": ["finishing", "sanding_prep"],
+      "error_modes": ["finish runs in high humidity"],
+      "training_needs": ["advanced masking"]
+    },
+    "reliability": {
+      "rework_rate_pct": 3.0,
+      "punctuality_rating": 5,
+      "supervision_need": "light"
+    }
+  },
+  {
+    "employee_id": "emp_install",
+    "name": "Jordan Patel",
+    "role_title": "Installer",
+    "employment_type": "contract",
+    "hourly_rate": 45.0,
+    "availability": {
+      "hours_per_week": 24,
+      "days_available": ["mon", "tue", "wed", "thu"]
+    },
+    "constraints": ["no_friday", "no_weekends"],
+    "skills": {
+      "rough_cutting_milling": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Field cuts."
+      },
+      "joinery": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Install joinery only."
+      },
+      "assembly_glueups": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.1,
+        "quality_risk": "med",
+        "experience_examples": "Limited in-shop assembly."
+      },
+      "sanding_prep": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.1,
+        "quality_risk": "med",
+        "experience_examples": "Touch-ups."
+      },
+      "finishing": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Touch-up only."
+      },
+      "cnc_setup_operation": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Not primary."
+      },
+      "cad_cam": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Not primary."
+      },
+      "install_on_site": {
+        "proficiency_score": 5,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Complex field installs."
+      },
+      "packing_crating": {
+        "proficiency_score": 3,
+        "speed_multiplier": 1.0,
+        "quality_risk": "low",
+        "experience_examples": "Load-out prep."
+      },
+      "troubleshooting_rework": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Field fixes."
+      }
+    },
+    "experience": {
+      "top_job_types": ["built_ins", "installations", "casework"],
+      "max_complexity": "high",
+      "max_complexity_examples": "Tight-tolerance lobby installs.",
+      "materials_familiarity": ["ply", "mdf", "maple"],
+      "finish_familiarity": ["lacquer", "poly"],
+      "cnc_experience": {
+        "years": 0,
+        "typical_ops": [],
+        "comfort_level": 1
+      }
+    },
+    "weaknesses": {
+      "tasks_avoid": ["finishing", "cad_cam"],
+      "tasks_best": ["install_on_site"],
+      "error_modes": ["chip-out on site cuts"],
+      "training_needs": ["better jigs for field cuts"]
+    },
+    "reliability": {
+      "rework_rate_pct": 2.0,
+      "punctuality_rating": 4,
+      "supervision_need": "none"
+    }
+  },
+  {
+    "employee_id": "emp_generalist",
+    "name": "Sam Torres",
+    "role_title": "Lead Carpenter",
+    "employment_type": "full_time",
+    "hourly_rate": 36.0,
+    "availability": {
+      "hours_per_week": 42,
+      "days_available": ["mon", "tue", "wed", "thu", "fri"]
+    },
+    "constraints": [],
+    "skills": {
+      "rough_cutting_milling": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Material staging."
+      },
+      "joinery": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Mortise and tenon."
+      },
+      "assembly_glueups": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Large assemblies."
+      },
+      "sanding_prep": {
+        "proficiency_score": 3,
+        "speed_multiplier": 1.0,
+        "quality_risk": "med",
+        "experience_examples": "Standard prep."
+      },
+      "finishing": {
+        "proficiency_score": 3,
+        "speed_multiplier": 1.0,
+        "quality_risk": "med",
+        "experience_examples": "Basic spray."
+      },
+      "cnc_setup_operation": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.1,
+        "quality_risk": "med",
+        "experience_examples": "Simple setups."
+      },
+      "cad_cam": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.1,
+        "quality_risk": "med",
+        "experience_examples": "Minor edits."
+      },
+      "install_on_site": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Complex installs."
+      },
+      "packing_crating": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "High-value packaging."
+      },
+      "troubleshooting_rework": {
+        "proficiency_score": 4,
+        "speed_multiplier": 0.9,
+        "quality_risk": "low",
+        "experience_examples": "Shop fixes."
+      }
+    },
+    "experience": {
+      "top_job_types": ["built_ins", "cabinets", "tables"],
+      "max_complexity": "high",
+      "max_complexity_examples": "Custom staircase cabinetry.",
+      "materials_familiarity": ["oak", "maple", "walnut", "ply"],
+      "finish_familiarity": ["poly", "lacquer", "oil"],
+      "cnc_experience": {
+        "years": 1,
+        "typical_ops": ["drilling"],
+        "comfort_level": 2
+      }
+    },
+    "weaknesses": {
+      "tasks_avoid": ["deep cad_cam"],
+      "tasks_best": ["joinery", "assembly_glueups"],
+      "error_modes": ["over-sanding edges"],
+      "training_needs": ["advanced cnc fixtures"]
+    },
+    "reliability": {
+      "rework_rate_pct": 3.0,
+      "punctuality_rating": 5,
+      "supervision_need": "none"
+    }
+  },
+  {
+    "employee_id": "emp_junior",
+    "name": "Taylor Brooks",
+    "role_title": "Junior Carpenter",
+    "employment_type": "part_time",
+    "hourly_rate": 22.0,
+    "availability": {
+      "hours_per_week": 24,
+      "days_available": ["mon", "wed", "fri"]
+    },
+    "constraints": ["school_pickup"],
+    "skills": {
+      "rough_cutting_milling": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Assists on material prep."
+      },
+      "joinery": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Limited."
+      },
+      "assembly_glueups": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Small assemblies."
+      },
+      "sanding_prep": {
+        "proficiency_score": 3,
+        "speed_multiplier": 1.0,
+        "quality_risk": "med",
+        "experience_examples": "Standard prep."
+      },
+      "finishing": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Touch-up only."
+      },
+      "cnc_setup_operation": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Not primary."
+      },
+      "cad_cam": {
+        "proficiency_score": 1,
+        "speed_multiplier": 1.3,
+        "quality_risk": "high",
+        "experience_examples": "Not primary."
+      },
+      "install_on_site": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.2,
+        "quality_risk": "med",
+        "experience_examples": "Helper on site."
+      },
+      "packing_crating": {
+        "proficiency_score": 3,
+        "speed_multiplier": 1.0,
+        "quality_risk": "low",
+        "experience_examples": "Packing support."
+      },
+      "troubleshooting_rework": {
+        "proficiency_score": 2,
+        "speed_multiplier": 1.1,
+        "quality_risk": "med",
+        "experience_examples": "Basic fixes."
+      }
+    },
+    "experience": {
+      "top_job_types": ["tables", "small builds", "shop support"],
+      "max_complexity": "low",
+      "max_complexity_examples": "Simple shelving.",
+      "materials_familiarity": ["ply", "mdf"],
+      "finish_familiarity": ["oil"],
+      "cnc_experience": {
+        "years": 0,
+        "typical_ops": [],
+        "comfort_level": 1
+      }
+    },
+    "weaknesses": {
+      "tasks_avoid": ["finishing", "joinery"],
+      "tasks_best": ["sanding_prep", "packing_crating"],
+      "error_modes": ["inconsistent sanding grit"],
+      "training_needs": ["joinery basics"]
+    },
+    "reliability": {
+      "rework_rate_pct": 5.0,
+      "punctuality_rating": 3,
+      "supervision_need": "medium"
+    }
+  }
+]

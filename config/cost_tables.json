@@ -1,0 +1,60 @@
+{
+  "material_costs_per_bf": {
+    "Pine": 3.5,
+    "MDF": 2.0,
+    "Plywood": 4.0,
+    "Oak": 8.0,
+    "Maple": 9.0,
+    "Cherry": 12.0,
+    "Walnut": 15.0,
+    "Other": 6.0
+  },
+  "grade_multipliers": {
+    "Economy": 0.75,
+    "Standard": 1.0,
+    "Premium": 1.35
+  },
+  "labor_rates": {
+    "general": 45.0,
+    "woodwork": 55.0,
+    "metalwork": 60.0,
+    "finishing": 50.0,
+    "upholstery": 65.0,
+    "installation": 70.0,
+    "machine": 40.0
+  },
+  "finishing_costs_per_sqft": {
+    "1": 1.5,
+    "2": 3.0,
+    "3": 5.0,
+    "4": 8.0,
+    "5": 12.0
+  },
+  "powder_coating_per_sqft": 4.5,
+  "hardware_base_costs": {
+    "minimal": 25.0,
+    "standard": 75.0,
+    "premium": 150.0,
+    "custom": 300.0
+  },
+  "delivery": {
+    "base_fee": 75.0,
+    "per_mile": 2.5,
+    "heavy_item_surcharge": 150.0
+  },
+  "installation_multiplier": 1.25,
+  "overhead_pct": 0.2,
+  "waste_factors": {
+    "Economy": 0.15,
+    "Standard": 0.1,
+    "Premium": 0.08
+  },
+  "max_risk_adjustment_pct": 0.25,
+  "complexity_multipliers": {
+    "1": 0.85,
+    "2": 0.95,
+    "3": 1.0,
+    "4": 1.15,
+    "5": 1.35
+  }
+}

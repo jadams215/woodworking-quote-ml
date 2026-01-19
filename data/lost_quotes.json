@@ -1,0 +1,31 @@
+[
+  {
+    "quote_id": "Q-20260119114010-2919",
+    "original_price": 31869.15,
+    "winning_price": 27088.7775,
+    "price_difference": 4780.372500000001,
+    "difference_pct": 17.647058823529417,
+    "competitor": "ABC Woodworks",
+    "loss_reason": "Price",
+    "notes": "Customer went with lower bid despite quality concerns",
+    "recorded_at": "2026-01-19T11:40:10.174811",
+    "parameters": {
+      "length_in": 80,
+      "width_in": 24,
+      "height_in": 36,
+      "quantity": 2,
+      "wood_species": "Maple",
+      "material_grade": "Premium",
+      "estimated_labor_hours": 12,
+      "estimated_machine_hours": 3,
+      "has_woodwork": true,
+      "has_finishing": true,
+      "finishing_complexity": 4,
+      "hardware_cost": 45,
+      "delivery_miles": 15,
+      "installation_required": true,
+      "job_complexity_score": 3,
+      "risk_adjustment_pct": 5
+    }
+  }
+]

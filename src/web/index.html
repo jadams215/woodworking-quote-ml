@@ -1,0 +1,3316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woodworking Quote Engine</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 1000px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            color: #2c3e50;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .checkbox-item input {
+            width: auto;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.visible {
+            display: block;
+        }
+
+        .pricing-tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .pricing-tiers {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tier {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tier:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .tier.recommended {
+            border-color: #27ae60;
+            background: linear-gradient(to bottom, #f0fff4, white);
+        }
+
+        .tier .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .tier.recommended .name {
+            color: #27ae60;
+        }
+
+        .tier .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .tier .margin {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .tier .description {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .tier .features {
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        .tier .features li {
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tier .features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge.recommended {
+            background: #27ae60;
+            color: white;
+        }
+
+        .cost-breakdown {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cost-breakdown h3 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cost-row:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            padding-top: 12px;
+            margin-top: 5px;
+            border-top: 2px solid #ddd;
+        }
+
+        .confidence-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .confidence-score {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .confidence-score.high {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .confidence-score.medium {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+        }
+
+        .confidence-score.low {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .confidence-score span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .confidence-details {
+            flex: 1;
+        }
+
+        .confidence-details h4 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .confidence-details p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .risk-flags {
+            margin-top: 10px;
+        }
+
+        .risk-flag {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 5px;
+        }
+
+        .quote-id {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 15px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .section-divider {
+            border-top: 1px solid #eee;
+            margin: 20px 0;
+            padding-top: 20px;
+        }
+
+        .notes {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .notes li {
+            margin-bottom: 5px;
+        }
+
+        .help-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            font-size: 11px;
+            text-align: center;
+            line-height: 16px;
+            cursor: help;
+            margin-left: 5px;
+        }
+
+        .field-hint {
+            display: block;
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* Visual Dimension Preview */
+        .dimension-preview {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .dimension-preview h4 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .preview-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 200px;
+            position: relative;
+            background: linear-gradient(to bottom, #fff 0%, #f0f0f0 100%);
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        .preview-3d {
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-15deg) rotateY(-25deg);
+        }
+
+        .preview-box {
+            position: relative;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
+            border: 2px solid #5D3A1A;
+            box-shadow:
+                5px 5px 0 #6B4226,
+                10px 10px 0 #5D3A1A,
+                inset 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .preview-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 5px;
+            right: -5px;
+            height: 10px;
+            background: linear-gradient(135deg, #A0522D 0%, #CD853F 100%);
+            transform: skewX(-45deg);
+            border-top: 1px solid #5D3A1A;
+            border-right: 1px solid #5D3A1A;
+        }
+
+        .preview-box::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            bottom: 5px;
+            width: 10px;
+            background: linear-gradient(135deg, #6B4226 0%, #8B4513 100%);
+            transform: skewY(-45deg);
+            border-right: 1px solid #5D3A1A;
+            border-bottom: 1px solid #5D3A1A;
+        }
+
+        .preview-dimensions {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .preview-dim {
+            text-align: center;
+        }
+
+        .preview-dim .label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .preview-dim .value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .preview-scale {
+            font-size: 0.7rem;
+            color: #aaa;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .preview-volume {
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px;
+            background: #e8f4fd;
+            border-radius: 4px;
+        }
+
+        .preview-volume .label {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .preview-volume .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Similar Projects Carousel */
+        .similar-projects {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .similar-projects h4 {
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        .similar-list {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .similar-item {
+            flex: 0 0 auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px 15px;
+            min-width: 150px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .similar-item:hover {
+            border-color: #3498db;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+        }
+
+        .similar-item .name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .similar-item .details {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .similar-item .price {
+            font-weight: 600;
+            color: #27ae60;
+            margin-top: 5px;
+        }
+
+        /* Project Image Preview */
+        .project-image-preview {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            text-align: center;
+            border: 2px dashed #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .project-image-preview.has-match {
+            border-style: solid;
+            border-color: #3498db;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e3f2fd 100%);
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .project-icon {
+            font-size: 80px;
+            opacity: 0.9;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image-preview:hover .project-icon {
+            transform: scale(1.05);
+        }
+
+        .project-type-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .project-type-hint {
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+
+        /* SVG furniture icons */
+        .furniture-svg {
+            width: 120px;
+            height: 120px;
+        }
+
+        .furniture-svg path,
+        .furniture-svg rect,
+        .furniture-svg polygon,
+        .furniture-svg circle {
+            fill: #8B4513;
+            stroke: #5D3A1A;
+            stroke-width: 2;
+        }
+
+        .furniture-svg .wood-grain {
+            fill: none;
+            stroke: #6B4226;
+            stroke-width: 1;
+            opacity: 0.3;
+        }
+
+        .furniture-svg .highlight {
+            fill: #A0522D;
+        }
+
+        .furniture-svg .shadow {
+            fill: #5D3A1A;
+        }
+
+        .furniture-svg .metal {
+            fill: #708090;
+            stroke: #4a5568;
+        }
+
+        /* Pricing Intelligence Section */
+        .pricing-intel-section {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .pricing-intel-section h4 {
+            font-size: 0.95rem;
+            color: #856404;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ffeeba;
+        }
+
+        .intel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .intel-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .intel-item label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .intel-item input,
+        .intel-item select,
+        .intel-item textarea {
+            font-size: 0.9rem;
+            padding: 8px 10px;
+        }
+
+        .intel-item textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .intel-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .pricing-intel-section .help-icon {
+            background: #ffc107;
+            color: #856404;
+        }
+
+        /* Photo Analysis Section */
+        .photo-analysis-section {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px dashed #4caf50;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .photo-analysis-section.dragging {
+            border-color: #2e7d32;
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+            transform: scale(1.02);
+        }
+
+        .photo-analysis-section.has-image {
+            border-style: solid;
+            border-color: #4caf50;
+        }
+
+        .photo-analysis-section h4 {
+            font-size: 1rem;
+            color: #2e7d32;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .photo-analysis-section h4 svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .photo-upload-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .photo-preview-container {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #c8e6c9;
+            position: relative;
+        }
+
+        .photo-preview-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .photo-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+        }
+
+        .photo-placeholder svg {
+            width: 60px;
+            height: 60px;
+            opacity: 0.5;
+        }
+
+        .photo-placeholder p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .photo-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .photo-btn {
+            background: linear-gradient(135deg, #4caf50, #388e3c);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            width: auto;
+        }
+
+        .photo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .photo-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .photo-btn.secondary {
+            background: linear-gradient(135deg, #78909c, #546e7a);
+        }
+
+        .photo-btn.secondary:hover {
+            box-shadow: 0 4px 12px rgba(84, 110, 122, 0.3);
+        }
+
+        .photo-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        #photoInput {
+            display: none;
+        }
+
+        /* Analysis Results */
+        .analysis-results {
+            margin-top: 15px;
+            text-align: left;
+            background: white;
+            border-radius: 6px;
+            padding: 15px;
+            display: none;
+        }
+
+        .analysis-results.visible {
+            display: block;
+        }
+
+        .analysis-results h5 {
+            font-size: 0.9rem;
+            color: #2e7d32;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .analysis-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e8f5e9;
+        }
+
+        .analysis-item:last-child {
+            border-bottom: none;
+        }
+
+        .analysis-item .label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .analysis-item .value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .analysis-item .confidence {
+            font-size: 0.75rem;
+            color: #888;
+            margin-left: 8px;
+        }
+
+        .analysis-item .confidence.high {
+            color: #27ae60;
+        }
+
+        .analysis-item .confidence.medium {
+            color: #f39c12;
+        }
+
+        .analysis-item .confidence.low {
+            color: #e74c3c;
+        }
+
+        .apply-analysis-btn {
+            width: 100%;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+        }
+
+        .apply-analysis-btn:hover {
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        .analysis-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .analysis-loading .spinner {
+            border-color: #c8e6c9;
+            border-top-color: #4caf50;
+        }
+
+        .analysis-description {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Manager Approval Section */
+        .approval-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ffeeba;
+        }
+
+        .approval-toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .approval-toggle-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .approval-toggle-label small {
+            display: block;
+            font-weight: normal;
+            color: #888;
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: #ff9800;
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Submit for Approval Button */
+        .submit-approval-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            margin-top: 10px;
+            display: none;
+        }
+
+        .submit-approval-btn:hover {
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+        }
+
+        .submit-approval-btn.visible {
+            display: block;
+        }
+
+        /* Approval Status Display */
+        .approval-status {
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .approval-status.visible {
+            display: block;
+        }
+
+        .approval-status.pending {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 1px solid #ffc107;
+        }
+
+        .approval-status.approved {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 1px solid #4caf50;
+        }
+
+        .approval-status.rejected {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border: 1px solid #f44336;
+        }
+
+        .approval-status-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .approval-status-header .icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .approval-status-header .title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .approval-status.pending .title {
+            color: #f57c00;
+        }
+
+        .approval-status.approved .title {
+            color: #2e7d32;
+        }
+
+        .approval-status.rejected .title {
+            color: #c62828;
+        }
+
+        .approval-status .timestamp {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .approval-status .message {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .manager-notes {
+            background: white;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .manager-notes h6 {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .manager-notes p {
+            font-size: 0.9rem;
+            color: #333;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .manager-notes .suggested-adjustments {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .manager-notes .adjustment-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 0.85rem;
+        }
+
+        .manager-notes .adjustment-item .label {
+            color: #666;
+        }
+
+        .manager-notes .adjustment-item .value {
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        .apply-manager-notes-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #4caf50, #388e3c);
+            margin-top: 10px;
+        }
+
+        .approval-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffc107;
+            border-top-color: #ff9800;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        .cancel-approval-btn {
+            background: transparent;
+            border: 1px solid #888;
+            color: #666;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            margin-top: 8px;
+            width: auto;
+        }
+
+        .cancel-approval-btn:hover {
+            background: #f5f5f5;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Integrations Card */
+        .integrations-card {
+            margin-top: 20px;
+        }
+
+        .integrations-card h2 {
+            display: flex;
+            align-items: center;
+        }
+
+        .integrations-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            color: #666;
+        }
+
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .integration-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s;
+        }
+
+        .integration-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .integration-item.connected {
+            border-color: #4caf50;
+            background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e9 100%);
+        }
+
+        .integration-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .integration-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .integration-icon.monday {
+            background: linear-gradient(135deg, #ff3d57, #ff6f91);
+            color: white;
+        }
+
+        .integration-icon.quickbooks {
+            background: linear-gradient(135deg, #2ca01c, #36b626);
+            color: white;
+        }
+
+        .integration-icon.tsheets {
+            background: linear-gradient(135deg, #0077c5, #0096f5);
+            color: white;
+        }
+
+        .integration-icon.gdrive {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+        }
+
+        .integration-info {
+            flex: 1;
+        }
+
+        .integration-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .integration-desc {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .integration-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-dot.connected {
+            background: #4caf50;
+            box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+        }
+
+        .status-dot.not-configured {
+            background: #bdbdbd;
+        }
+
+        .status-dot.error {
+            background: #f44336;
+        }
+
+        .status-text {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .integrations-footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .refresh-integrations-btn {
+            background: linear-gradient(135deg, #607d8b, #455a64);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .refresh-integrations-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(69, 90, 100, 0.3);
+        }
+
+        .refresh-integrations-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .integrations-hint {
+            font-size: 0.75rem;
+            color: #888;
+            margin: 0;
+        }
+
+        /* Create Project Section */
+        .create-project-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #e0e0e0;
+            text-align: center;
+        }
+
+        .create-project-btn {
+            background: linear-gradient(135deg, #673ab7, #512da8);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+
+        .create-project-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(103, 58, 183, 0.4);
+        }
+
+        .create-project-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .create-project-hint {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Woodworking Quote Engine</h1>
+            <p>Generate accurate quotes with ML-powered pricing recommendations</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Quote Input Form -->
+            <div class="card">
+                <h2>Quote Request</h2>
+
+                <!-- Photo Analysis Section -->
+                <div id="photoAnalysisSection" class="photo-analysis-section">
+                    <h4>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                        Photo Analysis (AI-Powered)
+                    </h4>
+
+                    <div class="photo-upload-area">
+                        <div id="photoPreviewContainer" class="photo-preview-container">
+                            <div id="photoPlaceholder" class="photo-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                    <circle cx="12" cy="13" r="4"/>
+                                </svg>
+                                <p>Upload or take a photo of furniture</p>
+                                <p style="font-size: 0.8rem; color: #888;">AI will analyze and auto-fill form fields</p>
+                            </div>
+                            <img id="photoPreview" src="" alt="Photo preview" style="display: none;">
+                        </div>
+
+                        <div class="photo-buttons">
+                            <input type="file" id="photoInput" accept="image/*" capture="environment">
+                            <button type="button" class="photo-btn" onclick="document.getElementById('photoInput').click()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                Upload Photo
+                            </button>
+                            <button type="button" class="photo-btn" id="cameraBtn" onclick="openCamera()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                    <circle cx="12" cy="13" r="4"/>
+                                </svg>
+                                Take Photo
+                            </button>
+                            <button type="button" class="photo-btn secondary" id="analyzeBtn" onclick="analyzePhoto()" disabled>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                                Analyze with AI
+                            </button>
+                        </div>
+
+                        <div id="analysisLoading" class="analysis-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>Analyzing image with Claude Vision...</p>
+                        </div>
+
+                        <div id="analysisResults" class="analysis-results">
+                            <h5>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                    <polyline points="9 11 12 14 22 4"/>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                                </svg>
+                                AI Analysis Results
+                            </h5>
+                            <div id="analysisItemsContainer"></div>
+                            <div id="analysisDescription" class="analysis-description"></div>
+                            <button type="button" class="photo-btn apply-analysis-btn" onclick="applyAnalysisResults()">
+                                Apply to Quote Form
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="quoteForm">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="project_name">Project Name</label>
+                            <input type="text" id="project_name" value="New Project" placeholder="e.g., Kitchen Cabinet, Dining Table, Executive Desk">
+
+                            <!-- Project Image Preview -->
+                            <div id="projectImagePreview" class="project-image-preview">
+                                <div class="project-image-container">
+                                    <div id="projectIcon" class="project-icon"></div>
+                                </div>
+                                <div class="project-type-label" id="projectTypeLabel">Woodworking Project</div>
+                                <div class="project-type-hint" id="projectTypeHint">Type a project name to see a preview</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="wood_species">Wood Species</label>
+                            <select id="wood_species">
+                                <option value="Pine">Pine</option>
+                                <option value="MDF">MDF</option>
+                                <option value="Plywood">Plywood</option>
+                                <option value="Oak">Oak</option>
+                                <option value="Maple" selected>Maple</option>
+                                <option value="Cherry">Cherry</option>
+                                <option value="Walnut">Walnut</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="material_grade">Material Grade</label>
+                            <select id="material_grade">
+                                <option value="Economy">Economy</option>
+                                <option value="Standard" selected>Standard</option>
+                                <option value="Premium">Premium</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="length_in">Length (inches)</label>
+                            <input type="number" id="length_in" value="48" min="0" step="0.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="width_in">Width (inches)</label>
+                            <input type="number" id="width_in" value="24" min="0" step="0.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="height_in">Height (inches)</label>
+                            <input type="number" id="height_in" value="36" min="0" step="0.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" id="quantity" value="1" min="1">
+                        </div>
+
+                        <!-- Visual Dimension Preview -->
+                        <div class="form-group full-width">
+                            <div class="dimension-preview">
+                                <h4>Size Preview</h4>
+                                <div class="preview-container">
+                                    <div class="preview-3d">
+                                        <div id="previewBox" class="preview-box"></div>
+                                    </div>
+                                </div>
+                                <div class="preview-dimensions">
+                                    <div class="preview-dim">
+                                        <div class="label">Length</div>
+                                        <div class="value" id="previewLength">48"</div>
+                                    </div>
+                                    <div class="preview-dim">
+                                        <div class="label">Width</div>
+                                        <div class="value" id="previewWidth">24"</div>
+                                    </div>
+                                    <div class="preview-dim">
+                                        <div class="label">Height</div>
+                                        <div class="value" id="previewHeight">36"</div>
+                                    </div>
+                                </div>
+                                <div class="preview-volume">
+                                    <span class="label">Board Feet: </span>
+                                    <span class="value" id="previewBoardFeet">24 BF</span>
+                                    <span class="label"> | Surface Area: </span>
+                                    <span class="value" id="previewSqFt">31 sq ft</span>
+                                </div>
+                                <div class="preview-scale">Scale: 1 pixel = 1 inch (max 150px per dimension)</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="estimated_labor_hours">Est. Labor Hours</label>
+                            <input type="number" id="estimated_labor_hours" value="8" min="0" step="0.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="estimated_machine_hours">Est. Machine Hours</label>
+                            <input type="number" id="estimated_machine_hours" value="2" min="0" step="0.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="finishing_complexity">Finishing Complexity (1-5)</label>
+                            <select id="finishing_complexity">
+                                <option value="1">1 - Minimal</option>
+                                <option value="2">2 - Basic</option>
+                                <option value="3" selected>3 - Moderate</option>
+                                <option value="4">4 - Complex</option>
+                                <option value="5">5 - Elaborate</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job_complexity_score">Job Complexity (1-5)</label>
+                            <select id="job_complexity_score">
+                                <option value="1">1 - Very Simple</option>
+                                <option value="2">2 - Simple</option>
+                                <option value="3" selected>3 - Moderate</option>
+                                <option value="4">4 - Complex</option>
+                                <option value="5">5 - Very Complex</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hardware_cost">Hardware Cost ($)</label>
+                            <input type="number" id="hardware_cost" value="50" min="0" step="5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delivery_miles">Delivery Distance (miles)</label>
+                            <input type="number" id="delivery_miles" value="10" min="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="risk_level">Project Risk Level
+                                <span class="help-icon" title="Risk adds a buffer to your quote for uncertain situations">?</span>
+                            </label>
+                            <select id="risk_level">
+                                <option value="0">Standard - Familiar work, reliable materials (0%)</option>
+                                <option value="5">Low Risk - Minor unknowns, standard deadline (+5%)</option>
+                                <option value="10">Medium Risk - New design or tight timeline (+10%)</option>
+                                <option value="15">High Risk - Complex specs or new customer (+15%)</option>
+                                <option value="20">Very High Risk - Multiple uncertainties (+20%)</option>
+                            </select>
+                            <small class="field-hint">Adds a safety buffer for projects with more uncertainty</small>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Work Types</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="has_woodwork" checked>
+                                    <span>Woodwork</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="has_metalwork">
+                                    <span>Metalwork</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="has_finishing" checked>
+                                    <span>Finishing</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="has_powder_coating">
+                                    <span>Powder Coating</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="has_upholstery">
+                                    <span>Upholstery</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="installation_required">
+                                    <span>Installation</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pricing Intelligence Section -->
+                        <div class="form-group full-width">
+                            <div class="pricing-intel-section">
+                                <h4>Pricing Intelligence <span class="help-icon" title="Information to help calibrate pricing">?</span></h4>
+
+                                <div class="intel-grid">
+                                    <div class="intel-item">
+                                        <label for="customer_budget">Customer Budget Range</label>
+                                        <select id="customer_budget">
+                                            <option value="">Not discussed</option>
+                                            <option value="under_5k">Under $5,000</option>
+                                            <option value="5k_10k">$5,000 - $10,000</option>
+                                            <option value="10k_25k">$10,000 - $25,000</option>
+                                            <option value="25k_50k">$25,000 - $50,000</option>
+                                            <option value="50k_100k">$50,000 - $100,000</option>
+                                            <option value="over_100k">Over $100,000</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="intel-item">
+                                        <label for="competitor_quote">Competitor Quote (if known)</label>
+                                        <input type="number" id="competitor_quote" placeholder="$0" min="0" step="100">
+                                    </div>
+
+                                    <div class="intel-item">
+                                        <label for="material_type">Material Construction</label>
+                                        <select id="material_type">
+                                            <option value="solid">Solid Wood Throughout</option>
+                                            <option value="veneer">Veneer over Core</option>
+                                            <option value="mixed">Mixed (Solid + Veneer)</option>
+                                            <option value="laminate">Laminate/Melamine</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="intel-item">
+                                        <label for="quality_level">Quality Level</label>
+                                        <select id="quality_level">
+                                            <option value="commercial">Commercial Grade</option>
+                                            <option value="residential" selected>Residential Quality</option>
+                                            <option value="heirloom">Heirloom/Museum Quality</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="intel-item">
+                                        <label for="timeline_urgency">Timeline</label>
+                                        <select id="timeline_urgency">
+                                            <option value="flexible">Flexible (8+ weeks)</option>
+                                            <option value="standard" selected>Standard (4-8 weeks)</option>
+                                            <option value="rush">Rush (2-4 weeks, +15%)</option>
+                                            <option value="urgent">Urgent (&lt;2 weeks, +30%)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="intel-item">
+                                        <label for="customer_type">Customer Type</label>
+                                        <select id="customer_type">
+                                            <option value="new">New Customer</option>
+                                            <option value="repeat">Repeat Customer</option>
+                                            <option value="referral">Referral</option>
+                                            <option value="commercial">Commercial/Business</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="intel-item full-width">
+                                    <label for="pricing_notes">Pricing Notes & Customer Feedback</label>
+                                    <textarea id="pricing_notes" rows="3" placeholder="Enter any pricing context: competitor quotes, customer objections, special requirements, material substitutions discussed, previous similar projects, etc."></textarea>
+                                </div>
+
+                                <div class="intel-item full-width">
+                                    <label for="scope_clarifications">Scope Clarifications</label>
+                                    <textarea id="scope_clarifications" rows="2" placeholder="Clarify: Is labor estimate accurate? What's included in delivery? Installation complexity? Finish specifications?"></textarea>
+                                </div>
+
+                                <!-- Manager Approval Section -->
+                                <div class="approval-section">
+                                    <div class="approval-toggle-container">
+                                        <div class="approval-toggle-label">
+                                            Requires Manager Approval
+                                            <small>Enable for quotes that need review before finalizing</small>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="requiresApproval" onchange="toggleApprovalSection()">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+
+                                    <button type="button" id="submitApprovalBtn" class="photo-btn submit-approval-btn" onclick="submitForApproval()">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M22 2L11 13"/>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                        </svg>
+                                        Submit for Manager Approval
+                                    </button>
+
+                                    <!-- Approval Status Display -->
+                                    <div id="approvalStatus" class="approval-status">
+                                        <div class="approval-status-header">
+                                            <span id="approvalIcon" class="icon"></span>
+                                            <span id="approvalTitle" class="title">Waiting for Approval</span>
+                                        </div>
+                                        <div id="approvalTimestamp" class="timestamp"></div>
+                                        <div id="approvalMessage" class="message"></div>
+
+                                        <!-- Manager Notes (shown when approved/rejected) -->
+                                        <div id="managerNotesContainer" class="manager-notes" style="display: none;">
+                                            <h6>Manager Notes</h6>
+                                            <p id="managerNotesText"></p>
+
+                                            <div id="suggestedAdjustments" class="suggested-adjustments" style="display: none;">
+                                                <h6>Suggested Adjustments</h6>
+                                                <div id="adjustmentsList"></div>
+                                            </div>
+
+                                            <button type="button" id="applyManagerNotesBtn" class="photo-btn apply-manager-notes-btn" onclick="applyManagerSuggestions()" style="display: none;">
+                                                Apply Suggested Adjustments
+                                            </button>
+                                        </div>
+
+                                        <button type="button" id="cancelApprovalBtn" class="cancel-approval-btn" onclick="cancelApprovalRequest()">
+                                            Cancel Request
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <button type="submit" id="generateBtn">Generate Quote</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Similar Projects Section -->
+                <div class="similar-projects">
+                    <h4>Quick Start from Similar Projects</h4>
+                    <div id="similarProjectsList" class="similar-list">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="card">
+                <h2>Quote Results</h2>
+
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generating quote...</p>
+                </div>
+
+                <div id="error" class="error" style="display: none;"></div>
+
+                <div id="results" class="results">
+                    <div id="emptyState" style="text-align: center; padding: 60px 20px; color: #888;">
+                        <p>Fill out the form and click "Generate Quote" to see pricing options.</p>
+                    </div>
+
+                    <div id="quoteResults" style="display: none;">
+                        <!-- Confidence Score -->
+                        <div class="confidence-box">
+                            <div id="confidenceScore" class="confidence-score high">
+                                <span id="confidenceValue">85</span>
+                                <span id="confidenceLevel">High</span>
+                            </div>
+                            <div class="confidence-details">
+                                <h4>Quote Confidence</h4>
+                                <p id="confidenceRange">Price range: $X - $Y</p>
+                                <div id="riskFlags" class="risk-flags"></div>
+                            </div>
+                        </div>
+
+                        <!-- Pricing Tiers -->
+                        <div class="pricing-tiers">
+                            <div class="tier" id="tierLow">
+                                <div class="name">Value</div>
+                                <div class="price" id="priceLow">$0</div>
+                                <div class="margin" id="marginLow">25% margin</div>
+                                <div class="description" id="descLow">Competitive pricing</div>
+                                <ul class="features" id="featuresLow"></ul>
+                            </div>
+                            <div class="tier recommended" id="tierStandard">
+                                <span class="badge recommended">Recommended</span>
+                                <div class="name">Standard</div>
+                                <div class="price" id="priceStandard">$0</div>
+                                <div class="margin" id="marginStandard">40% margin</div>
+                                <div class="description" id="descStandard">Full service</div>
+                                <ul class="features" id="featuresStandard"></ul>
+                            </div>
+                            <div class="tier" id="tierPremium">
+                                <div class="name">Premium</div>
+                                <div class="price" id="pricePremium">$0</div>
+                                <div class="margin" id="marginPremium">55% margin</div>
+                                <div class="description" id="descPremium">White-glove service</div>
+                                <ul class="features" id="featuresPremium"></ul>
+                            </div>
+                        </div>
+
+                        <!-- Cost Breakdown -->
+                        <div class="cost-breakdown">
+                            <h3>Cost Breakdown</h3>
+                            <div class="cost-row">
+                                <span>Materials</span>
+                                <span id="costMaterials">$0</span>
+                            </div>
+                            <div class="cost-row">
+                                <span>Labor</span>
+                                <span id="costLabor">$0</span>
+                            </div>
+                            <div class="cost-row">
+                                <span>Overhead</span>
+                                <span id="costOverhead">$0</span>
+                            </div>
+                            <div class="cost-row">
+                                <span>Delivery</span>
+                                <span id="costDelivery">$0</span>
+                            </div>
+                            <div class="cost-row">
+                                <span>Total Cost</span>
+                                <span id="costTotal">$0</span>
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div id="notesSection" class="notes" style="display: none;">
+                            <strong>Notes:</strong>
+                            <ul id="notesList"></ul>
+                        </div>
+
+                        <div class="quote-id">
+                            Quote ID: <span id="quoteId">-</span>
+                        </div>
+
+                        <!-- Create Project Section -->
+                        <div id="createProjectSection" class="create-project-section" style="display: none;">
+                            <button type="button" class="create-project-btn" onclick="createProjectFromQuote()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2v20M2 12h20"/>
+                                </svg>
+                                Create Project in All Systems
+                            </button>
+                            <p class="create-project-hint">Creates board in Monday.com, estimate in QuickBooks, and folder in Google Drive</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integrations Status Card -->
+            <div class="card integrations-card">
+                <h2>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    Connected Systems
+                </h2>
+
+                <div id="integrationsLoading" class="integrations-loading">
+                    <div class="spinner"></div>
+                    <p>Checking integrations...</p>
+                </div>
+
+                <div id="integrationsStatus" class="integrations-grid" style="display: none;">
+                    <!-- Monday.com -->
+                    <div class="integration-item" id="integrationMonday">
+                        <div class="integration-icon monday">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <div class="integration-info">
+                            <div class="integration-name">Monday.com</div>
+                            <div class="integration-desc">Project Management</div>
+                        </div>
+                        <div class="integration-status" id="mondayStatus">
+                            <span class="status-dot not-configured"></span>
+                            <span class="status-text">Not Configured</span>
+                        </div>
+                    </div>
+
+                    <!-- QuickBooks -->
+                    <div class="integration-item" id="integrationQuickBooks">
+                        <div class="integration-icon quickbooks">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                        </div>
+                        <div class="integration-info">
+                            <div class="integration-name">QuickBooks</div>
+                            <div class="integration-desc">Accounting & Invoicing</div>
+                        </div>
+                        <div class="integration-status" id="quickbooksStatus">
+                            <span class="status-dot not-configured"></span>
+                            <span class="status-text">Not Configured</span>
+                        </div>
+                    </div>
+
+                    <!-- TSheets -->
+                    <div class="integration-item" id="integrationTSheets">
+                        <div class="integration-icon tsheets">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14" stroke="white" fill="none" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="integration-info">
+                            <div class="integration-name">TSheets</div>
+                            <div class="integration-desc">Time Tracking</div>
+                        </div>
+                        <div class="integration-status" id="tsheetsStatus">
+                            <span class="status-dot not-configured"></span>
+                            <span class="status-text">Not Configured</span>
+                        </div>
+                    </div>
+
+                    <!-- Google Drive -->
+                    <div class="integration-item" id="integrationGDrive">
+                        <div class="integration-icon gdrive">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7.71 3.5L1.15 15l3.43 6 6.56-12.5L7.71 3.5zM22.85 15L16.29 3.5h-6.86l6.57 11.5H22.85zM8.5 17l-3.43 6h13.72l3.43-6H8.5z"/>
+                            </svg>
+                        </div>
+                        <div class="integration-info">
+                            <div class="integration-name">Google Drive</div>
+                            <div class="integration-desc">Document Storage</div>
+                        </div>
+                        <div class="integration-status" id="gdriveStatus">
+                            <span class="status-dot not-configured"></span>
+                            <span class="status-text">Not Configured</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="integrations-footer">
+                    <button type="button" class="refresh-integrations-btn" onclick="loadIntegrationsStatus()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"/>
+                            <polyline points="1 20 1 14 7 14"/>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                        </svg>
+                        Refresh Status
+                    </button>
+                    <p class="integrations-hint">Configure API keys in environment variables to connect</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+
+        document.getElementById('quoteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await generateQuote();
+        });
+
+        async function generateQuote() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const emptyState = document.getElementById('emptyState');
+            const quoteResults = document.getElementById('quoteResults');
+            const generateBtn = document.getElementById('generateBtn');
+
+            // Show loading
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            emptyState.style.display = 'none';
+            quoteResults.style.display = 'none';
+            generateBtn.disabled = true;
+
+            try {
+                const formData = {
+                    project_name: document.getElementById('project_name').value,
+                    wood_species: document.getElementById('wood_species').value,
+                    material_grade: document.getElementById('material_grade').value,
+                    length_in: parseFloat(document.getElementById('length_in').value) || 0,
+                    width_in: parseFloat(document.getElementById('width_in').value) || 0,
+                    height_in: parseFloat(document.getElementById('height_in').value) || 0,
+                    quantity: parseInt(document.getElementById('quantity').value) || 1,
+                    estimated_labor_hours: parseFloat(document.getElementById('estimated_labor_hours').value) || 0,
+                    estimated_machine_hours: parseFloat(document.getElementById('estimated_machine_hours').value) || 0,
+                    finishing_complexity: parseInt(document.getElementById('finishing_complexity').value) || 3,
+                    job_complexity_score: parseInt(document.getElementById('job_complexity_score').value) || 3,
+                    hardware_cost: parseFloat(document.getElementById('hardware_cost').value) || 0,
+                    delivery_miles: parseFloat(document.getElementById('delivery_miles').value) || 0,
+                    risk_adjustment_pct: parseFloat(document.getElementById('risk_level').value) || 0,
+                    has_woodwork: document.getElementById('has_woodwork').checked,
+                    has_metalwork: document.getElementById('has_metalwork').checked,
+                    has_finishing: document.getElementById('has_finishing').checked,
+                    has_powder_coating: document.getElementById('has_powder_coating').checked,
+                    has_upholstery: document.getElementById('has_upholstery').checked,
+                    installation_required: document.getElementById('installation_required').checked,
+                    // Pricing intelligence fields
+                    customer_budget: document.getElementById('customer_budget').value,
+                    competitor_quote: parseFloat(document.getElementById('competitor_quote').value) || null,
+                    material_type: document.getElementById('material_type').value,
+                    quality_level: document.getElementById('quality_level').value,
+                    timeline_urgency: document.getElementById('timeline_urgency').value,
+                    customer_type: document.getElementById('customer_type').value,
+                    pricing_notes: document.getElementById('pricing_notes').value,
+                    scope_clarifications: document.getElementById('scope_clarifications').value,
+                    include_ml_adjustment: false,  // Use deterministic model for now
+                };
+
+                const response = await fetch(`${API_BASE}/api/v1/quotes/generate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                displayResults(result);
+
+            } catch (err) {
+                console.error('Error:', err);
+                error.textContent = `Error generating quote: ${err.message}. Make sure the API server is running.`;
+                error.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+                generateBtn.disabled = false;
+            }
+        }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+            }).format(value);
+        }
+
+        function displayResults(data) {
+            const quoteResults = document.getElementById('quoteResults');
+            quoteResults.style.display = 'block';
+
+            // Confidence
+            const confidenceScore = document.getElementById('confidenceScore');
+            const confidenceValue = document.getElementById('confidenceValue');
+            const confidenceLevel = document.getElementById('confidenceLevel');
+            const confidenceRange = document.getElementById('confidenceRange');
+            const riskFlags = document.getElementById('riskFlags');
+
+            confidenceValue.textContent = Math.round(data.confidence.score);
+            confidenceLevel.textContent = data.confidence.level;
+
+            confidenceScore.className = 'confidence-score ' + data.confidence.level.toLowerCase();
+
+            confidenceRange.textContent = `Price range: ${formatCurrency(data.confidence.range_low)} - ${formatCurrency(data.confidence.range_high)}`;
+
+            riskFlags.innerHTML = '';
+            if (data.risk.flags && data.risk.flags.length > 0) {
+                data.risk.flags.forEach(flag => {
+                    const span = document.createElement('span');
+                    span.className = 'risk-flag';
+                    span.textContent = flag;
+                    riskFlags.appendChild(span);
+                });
+            }
+
+            // Pricing tiers
+            const tiers = data.tiers;
+
+            document.getElementById('priceLow').textContent = formatCurrency(tiers.low.price);
+            document.getElementById('marginLow').textContent = `${tiers.low.margin_pct}% margin`;
+            document.getElementById('descLow').textContent = tiers.low.description;
+            displayFeatures('featuresLow', tiers.low.features);
+
+            document.getElementById('priceStandard').textContent = formatCurrency(tiers.standard.price);
+            document.getElementById('marginStandard').textContent = `${tiers.standard.margin_pct}% margin`;
+            document.getElementById('descStandard').textContent = tiers.standard.description;
+            displayFeatures('featuresStandard', tiers.standard.features);
+
+            document.getElementById('pricePremium').textContent = formatCurrency(tiers.premium.price);
+            document.getElementById('marginPremium').textContent = `${tiers.premium.margin_pct}% margin`;
+            document.getElementById('descPremium').textContent = tiers.premium.description;
+            displayFeatures('featuresPremium', tiers.premium.features);
+
+            // Cost breakdown
+            const breakdown = data.cost_breakdown;
+            document.getElementById('costMaterials').textContent = formatCurrency(breakdown.total_material_cost);
+            document.getElementById('costLabor').textContent = formatCurrency(breakdown.total_labor_cost);
+            document.getElementById('costOverhead').textContent = formatCurrency(breakdown.overhead_cost);
+            document.getElementById('costDelivery').textContent = formatCurrency(breakdown.delivery_cost || 0);
+            document.getElementById('costTotal').textContent = formatCurrency(breakdown.total_cost);
+
+            // Notes
+            const notesSection = document.getElementById('notesSection');
+            const notesList = document.getElementById('notesList');
+            if (data.notes && data.notes.length > 0) {
+                notesList.innerHTML = '';
+                data.notes.forEach(note => {
+                    const li = document.createElement('li');
+                    li.textContent = note;
+                    notesList.appendChild(li);
+                });
+                notesSection.style.display = 'block';
+            } else {
+                notesSection.style.display = 'none';
+            }
+
+            // Quote ID
+            document.getElementById('quoteId').textContent = data.quote_id;
+        }
+
+        function displayFeatures(elementId, features) {
+            const ul = document.getElementById(elementId);
+            ul.innerHTML = '';
+            if (features && features.length > 0) {
+                features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    ul.appendChild(li);
+                });
+            }
+        }
+
+        // ===== Project Image Preview =====
+        const projectTypes = {
+            // Tables
+            table: {
+                keywords: ['table', 'dining', 'coffee', 'end table', 'side table', 'console'],
+                label: 'Table',
+                hint: 'Dining tables, coffee tables, console tables',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Table top -->
+                    <rect x="5" y="25" width="110" height="8" rx="2" class="highlight"/>
+                    <rect x="5" y="30" width="110" height="5" class="shadow"/>
+                    <!-- Legs -->
+                    <rect x="12" y="33" width="8" height="55" rx="1"/>
+                    <rect x="100" y="33" width="8" height="55" rx="1"/>
+                    <!-- Cross support -->
+                    <rect x="18" y="70" width="84" height="4" rx="1"/>
+                    <!-- Wood grain lines -->
+                    <line x1="20" y1="27" x2="100" y2="27" class="wood-grain"/>
+                    <line x1="25" y1="29" x2="95" y2="29" class="wood-grain"/>
+                </svg>`
+            },
+            // Conference table
+            conference: {
+                keywords: ['conference', 'meeting', 'boardroom'],
+                label: 'Conference Table',
+                hint: 'Large meeting and boardroom tables',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Large table top -->
+                    <ellipse cx="60" cy="35" rx="55" ry="20" class="highlight"/>
+                    <ellipse cx="60" cy="38" rx="55" ry="18" class="shadow"/>
+                    <!-- Center pedestal -->
+                    <rect x="50" y="45" width="20" height="40" rx="2"/>
+                    <!-- Base -->
+                    <ellipse cx="60" cy="88" rx="30" ry="8"/>
+                    <!-- Wood grain -->
+                    <ellipse cx="60" cy="35" rx="40" ry="12" fill="none" class="wood-grain"/>
+                </svg>`
+            },
+            // Desk
+            desk: {
+                keywords: ['desk', 'office', 'executive', 'workstation', 'computer desk'],
+                label: 'Desk',
+                hint: 'Office desks, executive desks, workstations',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Desktop -->
+                    <rect x="5" y="20" width="110" height="8" rx="2" class="highlight"/>
+                    <!-- Left drawers -->
+                    <rect x="8" y="30" width="35" height="55" rx="2"/>
+                    <rect x="12" y="35" width="27" height="12" rx="1" class="highlight"/>
+                    <rect x="12" y="50" width="27" height="12" rx="1" class="highlight"/>
+                    <rect x="12" y="65" width="27" height="17" rx="1" class="highlight"/>
+                    <!-- Drawer handles -->
+                    <rect x="22" y="40" width="8" height="2" rx="1" class="metal"/>
+                    <rect x="22" y="55" width="8" height="2" rx="1" class="metal"/>
+                    <rect x="22" y="72" width="8" height="2" rx="1" class="metal"/>
+                    <!-- Right leg -->
+                    <rect x="100" y="28" width="8" height="57" rx="1"/>
+                    <!-- Modesty panel -->
+                    <rect x="45" y="28" width="53" height="40" rx="1" class="shadow"/>
+                </svg>`
+            },
+            // Cabinet
+            cabinet: {
+                keywords: ['cabinet', 'kitchen', 'bathroom', 'vanity', 'storage', 'cupboard', 'pantry'],
+                label: 'Cabinet',
+                hint: 'Kitchen cabinets, bathroom vanities, storage units',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Cabinet body -->
+                    <rect x="10" y="10" width="100" height="80" rx="3"/>
+                    <!-- Left door -->
+                    <rect x="14" y="14" width="44" height="72" rx="2" class="highlight"/>
+                    <!-- Right door -->
+                    <rect x="62" y="14" width="44" height="72" rx="2" class="highlight"/>
+                    <!-- Door handles -->
+                    <rect x="52" y="45" width="3" height="15" rx="1" class="metal"/>
+                    <rect x="65" y="45" width="3" height="15" rx="1" class="metal"/>
+                    <!-- Panel details -->
+                    <rect x="20" y="20" width="32" height="60" rx="1" fill="none" stroke="#6B4226" stroke-width="1"/>
+                    <rect x="68" y="20" width="32" height="60" rx="1" fill="none" stroke="#6B4226" stroke-width="1"/>
+                </svg>`
+            },
+            // Bookshelf
+            bookshelf: {
+                keywords: ['bookshelf', 'bookcase', 'shelf', 'shelving', 'display', 'rack'],
+                label: 'Bookshelf',
+                hint: 'Bookshelves, display units, shelving systems',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Frame -->
+                    <rect x="15" y="5" width="8" height="90" rx="1"/>
+                    <rect x="97" y="5" width="8" height="90" rx="1"/>
+                    <!-- Shelves -->
+                    <rect x="15" y="5" width="90" height="6" rx="1" class="highlight"/>
+                    <rect x="15" y="28" width="90" height="5" rx="1"/>
+                    <rect x="15" y="51" width="90" height="5" rx="1"/>
+                    <rect x="15" y="74" width="90" height="5" rx="1"/>
+                    <rect x="15" y="89" width="90" height="6" rx="1" class="shadow"/>
+                    <!-- Books (decorative) -->
+                    <rect x="28" y="12" width="6" height="14" fill="#c0392b"/>
+                    <rect x="36" y="14" width="5" height="12" fill="#2980b9"/>
+                    <rect x="43" y="11" width="7" height="15" fill="#27ae60"/>
+                    <rect x="52" y="13" width="4" height="13" fill="#8e44ad"/>
+                </svg>`
+            },
+            // Chair
+            chair: {
+                keywords: ['chair', 'seat', 'stool', 'bench', 'seating'],
+                label: 'Chair / Seating',
+                hint: 'Chairs, stools, benches, seating',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Back rest -->
+                    <rect x="25" y="5" width="70" height="8" rx="2" class="highlight"/>
+                    <rect x="30" y="13" width="8" height="35" rx="1"/>
+                    <rect x="82" y="13" width="8" height="35" rx="1"/>
+                    <!-- Seat -->
+                    <rect x="20" y="48" width="80" height="8" rx="2" class="highlight"/>
+                    <!-- Front legs -->
+                    <rect x="25" y="56" width="8" height="38" rx="1"/>
+                    <rect x="87" y="56" width="8" height="38" rx="1"/>
+                    <!-- Back legs -->
+                    <rect x="32" y="48" width="6" height="46" rx="1" class="shadow"/>
+                    <rect x="82" y="48" width="6" height="46" rx="1" class="shadow"/>
+                    <!-- Stretcher -->
+                    <rect x="33" y="78" width="54" height="4" rx="1"/>
+                </svg>`
+            },
+            // Bed
+            bed: {
+                keywords: ['bed', 'headboard', 'footboard', 'bedroom', 'frame'],
+                label: 'Bed Frame',
+                hint: 'Bed frames, headboards, bedroom furniture',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Headboard -->
+                    <rect x="5" y="10" width="12" height="60" rx="2"/>
+                    <rect x="8" y="5" width="6" height="65" rx="1" class="highlight"/>
+                    <!-- Footboard -->
+                    <rect x="103" y="30" width="12" height="40" rx="2"/>
+                    <!-- Frame rails -->
+                    <rect x="17" y="50" width="86" height="8" rx="1"/>
+                    <rect x="17" y="62" width="86" height="6" rx="1" class="shadow"/>
+                    <!-- Slats hint -->
+                    <line x1="25" y1="54" x2="25" y2="60" class="wood-grain" stroke-width="2"/>
+                    <line x1="40" y1="54" x2="40" y2="60" class="wood-grain" stroke-width="2"/>
+                    <line x1="55" y1="54" x2="55" y2="60" class="wood-grain" stroke-width="2"/>
+                    <line x1="70" y1="54" x2="70" y2="60" class="wood-grain" stroke-width="2"/>
+                    <line x1="85" y1="54" x2="85" y2="60" class="wood-grain" stroke-width="2"/>
+                    <!-- Legs -->
+                    <rect x="8" y="70" width="6" height="25" rx="1"/>
+                    <rect x="106" y="70" width="6" height="25" rx="1"/>
+                </svg>`
+            },
+            // Dresser
+            dresser: {
+                keywords: ['dresser', 'chest', 'drawers', 'credenza', 'sideboard', 'buffet'],
+                label: 'Dresser / Chest',
+                hint: 'Dressers, chests of drawers, sideboards',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Body -->
+                    <rect x="10" y="10" width="100" height="75" rx="3"/>
+                    <!-- Top -->
+                    <rect x="8" y="8" width="104" height="6" rx="2" class="highlight"/>
+                    <!-- Drawers -->
+                    <rect x="15" y="18" width="90" height="18" rx="2" class="highlight"/>
+                    <rect x="15" y="40" width="90" height="18" rx="2" class="highlight"/>
+                    <rect x="15" y="62" width="90" height="18" rx="2" class="highlight"/>
+                    <!-- Handles -->
+                    <rect x="45" y="25" width="12" height="3" rx="1" class="metal"/>
+                    <rect x="63" y="25" width="12" height="3" rx="1" class="metal"/>
+                    <rect x="45" y="47" width="12" height="3" rx="1" class="metal"/>
+                    <rect x="63" y="47" width="12" height="3" rx="1" class="metal"/>
+                    <rect x="45" y="69" width="12" height="3" rx="1" class="metal"/>
+                    <rect x="63" y="69" width="12" height="3" rx="1" class="metal"/>
+                    <!-- Feet -->
+                    <rect x="15" y="85" width="10" height="10" rx="2"/>
+                    <rect x="95" y="85" width="10" height="10" rx="2"/>
+                </svg>`
+            },
+            // TV Stand / Entertainment
+            entertainment: {
+                keywords: ['tv', 'entertainment', 'media', 'stand', 'console'],
+                label: 'Entertainment Center',
+                hint: 'TV stands, media consoles, entertainment units',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Main body -->
+                    <rect x="5" y="30" width="110" height="50" rx="3"/>
+                    <!-- Top shelf -->
+                    <rect x="3" y="28" width="114" height="5" rx="2" class="highlight"/>
+                    <!-- Left cabinet -->
+                    <rect x="10" y="35" width="30" height="40" rx="2" class="highlight"/>
+                    <!-- Center open shelf -->
+                    <rect x="45" y="35" width="30" height="40" rx="1" class="shadow"/>
+                    <rect x="45" y="55" width="30" height="3" rx="1"/>
+                    <!-- Right cabinet -->
+                    <rect x="80" y="35" width="30" height="40" rx="2" class="highlight"/>
+                    <!-- Handles -->
+                    <circle cx="35" cy="55" r="3" class="metal"/>
+                    <circle cx="85" cy="55" r="3" class="metal"/>
+                    <!-- Legs -->
+                    <rect x="10" y="80" width="8" height="15" rx="1"/>
+                    <rect x="102" y="80" width="8" height="15" rx="1"/>
+                </svg>`
+            },
+            // Default woodworking
+            default: {
+                keywords: [],
+                label: 'Custom Woodwork',
+                hint: 'Custom woodworking project',
+                svg: `<svg class="furniture-svg" viewBox="0 0 120 100">
+                    <!-- Wood planks -->
+                    <rect x="10" y="20" width="100" height="15" rx="2" class="highlight"/>
+                    <rect x="10" y="38" width="100" height="15" rx="2"/>
+                    <rect x="10" y="56" width="100" height="15" rx="2" class="highlight"/>
+                    <rect x="10" y="74" width="100" height="15" rx="2"/>
+                    <!-- Wood grain -->
+                    <line x1="20" y1="25" x2="100" y2="25" class="wood-grain"/>
+                    <line x1="15" y1="45" x2="105" y2="45" class="wood-grain"/>
+                    <line x1="25" y1="63" x2="95" y2="63" class="wood-grain"/>
+                    <line x1="18" y1="81" x2="102" y2="81" class="wood-grain"/>
+                    <!-- Tool hint -->
+                    <circle cx="60" cy="50" r="20" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3"/>
+                </svg>`
+            }
+        };
+
+        function updateProjectImage() {
+            const projectName = document.getElementById('project_name').value.toLowerCase();
+            const preview = document.getElementById('projectImagePreview');
+            const iconContainer = document.getElementById('projectIcon');
+            const label = document.getElementById('projectTypeLabel');
+            const hint = document.getElementById('projectTypeHint');
+
+            // Find matching project type
+            let matchedType = projectTypes.default;
+            let matched = false;
+
+            for (const [key, type] of Object.entries(projectTypes)) {
+                if (key === 'default') continue;
+                for (const keyword of type.keywords) {
+                    if (projectName.includes(keyword)) {
+                        matchedType = type;
+                        matched = true;
+                        break;
+                    }
+                }
+                if (matched) break;
+            }
+
+            // Update the preview
+            iconContainer.innerHTML = matchedType.svg;
+            label.textContent = matchedType.label;
+            hint.textContent = matchedType.hint;
+
+            // Update styling based on match
+            if (matched) {
+                preview.classList.add('has-match');
+            } else {
+                preview.classList.remove('has-match');
+            }
+        }
+
+        // Add event listener for project name
+        document.getElementById('project_name').addEventListener('input', updateProjectImage);
+        document.getElementById('project_name').addEventListener('change', updateProjectImage);
+
+        // Initialize on page load
+        updateProjectImage();
+
+        // ===== Dimension Preview =====
+        function updateDimensionPreview() {
+            const length = parseFloat(document.getElementById('length_in').value) || 0;
+            const width = parseFloat(document.getElementById('width_in').value) || 0;
+            const height = parseFloat(document.getElementById('height_in').value) || 0;
+
+            // Update text values
+            document.getElementById('previewLength').textContent = `${length}"`;
+            document.getElementById('previewWidth').textContent = `${width}"`;
+            document.getElementById('previewHeight').textContent = `${height}"`;
+
+            // Calculate board feet: (L x W x thickness) / 144 for each face approximation
+            // Simplified: using volume / 144 as rough board feet
+            const boardFeet = (length * width * (height > 0 ? 1 : 0.75)) / 144;
+            document.getElementById('previewBoardFeet').textContent = `${boardFeet.toFixed(1)} BF`;
+
+            // Calculate surface area (all 6 sides)
+            const sqFt = (2 * (length * width + length * height + width * height)) / 144;
+            document.getElementById('previewSqFt').textContent = `${sqFt.toFixed(1)} sq ft`;
+
+            // Update visual box size (scale to fit in preview area)
+            const maxDim = 130;
+            const maxInput = Math.max(length, width, height, 1);
+            const scale = Math.min(1, maxDim / maxInput);
+
+            const box = document.getElementById('previewBox');
+            box.style.width = Math.max(20, length * scale) + 'px';
+            box.style.height = Math.max(20, height * scale) + 'px';
+
+            // Update wood color based on species
+            const species = document.getElementById('wood_species').value;
+            const woodColors = {
+                'Pine': { main: '#DEB887', light: '#F5DEB3', dark: '#C4A35A' },
+                'MDF': { main: '#B8A088', light: '#D4C4A8', dark: '#8B7355' },
+                'Plywood': { main: '#C9A66B', light: '#E5D4B3', dark: '#A08050' },
+                'Oak': { main: '#8B4513', light: '#A0522D', dark: '#5D3A1A' },
+                'Maple': { main: '#C4A77D', light: '#E8D4B8', dark: '#8B7355' },
+                'Cherry': { main: '#8B0000', light: '#A52A2A', dark: '#5C0000' },
+                'Walnut': { main: '#3E2723', light: '#5D4037', dark: '#1B0000' },
+                'Other': { main: '#8B4513', light: '#A0522D', dark: '#5D3A1A' }
+            };
+            const colors = woodColors[species] || woodColors['Oak'];
+            box.style.background = `linear-gradient(135deg, ${colors.main} 0%, ${colors.light} 50%, ${colors.main} 100%)`;
+            box.style.borderColor = colors.dark;
+        }
+
+        // Add event listeners for dimension inputs
+        ['length_in', 'width_in', 'height_in', 'wood_species'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateDimensionPreview);
+            document.getElementById(id).addEventListener('change', updateDimensionPreview);
+        });
+
+        // ===== Similar Projects =====
+        // Sample historical projects (would come from API in production)
+        const sampleProjects = [
+            { name: 'Executive Desk', dims: '72x36x30', species: 'Walnut', price: 4500 },
+            { name: 'Kitchen Cabinet Set', dims: '120x24x36', species: 'Maple', price: 8200 },
+            { name: 'Dining Table', dims: '84x42x30', species: 'Oak', price: 3800 },
+            { name: 'Bookshelf Unit', dims: '48x12x72', species: 'Cherry', price: 2400 },
+            { name: 'TV Console', dims: '60x18x24', species: 'Walnut', price: 2100 },
+            { name: 'Credenza', dims: '66x20x32', species: 'Maple', price: 3200 },
+        ];
+
+        // Initialize preview on page load
+        updateDimensionPreview();
+
+        // Load similar projects on page load
+        displaySimilarProjects(sampleProjects);
+
+        async function loadSimilarProjects() {
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/quotes/similar`);
+                if (response.ok) {
+                    const projects = await response.json();
+                    displaySimilarProjects(projects);
+                }
+            } catch (e) {
+                // Use sample data if API not available
+                displaySimilarProjects(sampleProjects);
+            }
+        }
+
+        function displaySimilarProjects(projects) {
+            const container = document.getElementById('similarProjectsList');
+            if (!container) return;
+
+            container.innerHTML = '';
+            projects.slice(0, 6).forEach(project => {
+                const item = document.createElement('div');
+                item.className = 'similar-item';
+                item.innerHTML = `
+                    <div class="name">${project.name}</div>
+                    <div class="details">${project.dims} | ${project.species}</div>
+                    <div class="price">${formatCurrency(project.price)}</div>
+                `;
+                item.onclick = () => applyProjectDefaults(project);
+                container.appendChild(item);
+            });
+        }
+
+        function applyProjectDefaults(project) {
+            // Parse dimensions
+            const dims = project.dims.split('x').map(d => parseFloat(d));
+            if (dims.length === 3) {
+                document.getElementById('length_in').value = dims[0];
+                document.getElementById('width_in').value = dims[1];
+                document.getElementById('height_in').value = dims[2];
+            }
+
+            // Set wood species if available
+            const speciesSelect = document.getElementById('wood_species');
+            const options = Array.from(speciesSelect.options);
+            const match = options.find(o => o.value === project.species);
+            if (match) {
+                speciesSelect.value = project.species;
+            }
+
+            // Update preview
+            updateDimensionPreview();
+        }
+
+        // ===== Photo Analysis Section =====
+        let currentPhotoData = null;
+        let currentAnalysisResult = null;
+
+        // Handle file input change
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handlePhotoFile(file);
+            }
+        });
+
+        // Drag and drop handlers
+        const photoSection = document.getElementById('photoAnalysisSection');
+
+        photoSection.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.classList.add('dragging');
+        });
+
+        photoSection.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.classList.remove('dragging');
+        });
+
+        photoSection.addEventListener('drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.classList.remove('dragging');
+
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type.startsWith('image/')) {
+                handlePhotoFile(files[0]);
+            }
+        });
+
+        function handlePhotoFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentPhotoData = e.target.result;
+                displayPhotoPreview(currentPhotoData);
+                document.getElementById('analyzeBtn').disabled = false;
+                document.getElementById('photoAnalysisSection').classList.add('has-image');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayPhotoPreview(dataUrl) {
+            const preview = document.getElementById('photoPreview');
+            const placeholder = document.getElementById('photoPlaceholder');
+
+            preview.src = dataUrl;
+            preview.style.display = 'block';
+            placeholder.style.display = 'none';
+
+            // Hide previous results
+            document.getElementById('analysisResults').classList.remove('visible');
+        }
+
+        function openCamera() {
+            // On mobile, this will open the camera
+            const input = document.getElementById('photoInput');
+            input.setAttribute('capture', 'environment');
+            input.click();
+        }
+
+        async function analyzePhoto() {
+            if (!currentPhotoData) {
+                alert('Please upload or take a photo first.');
+                return;
+            }
+
+            const loading = document.getElementById('analysisLoading');
+            const results = document.getElementById('analysisResults');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+
+            // Show loading state
+            loading.style.display = 'flex';
+            results.classList.remove('visible');
+            analyzeBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/vision/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        image_data: currentPhotoData
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Analysis failed: ${response.status}`);
+                }
+
+                const result = await response.json();
+                currentAnalysisResult = result;
+                displayAnalysisResults(result);
+
+            } catch (err) {
+                console.error('Analysis error:', err);
+                alert(`Failed to analyze image: ${err.message}\n\nMake sure the API server is running and has the ANTHROPIC_API_KEY configured.`);
+            } finally {
+                loading.style.display = 'none';
+                analyzeBtn.disabled = false;
+            }
+        }
+
+        function displayAnalysisResults(result) {
+            const container = document.getElementById('analysisItemsContainer');
+            const description = document.getElementById('analysisDescription');
+            const resultsDiv = document.getElementById('analysisResults');
+
+            container.innerHTML = '';
+
+            // Create analysis items
+            const fields = [
+                { key: 'project_type', label: 'Project Type' },
+                { key: 'wood_species', label: 'Wood Species' },
+                { key: 'material_grade', label: 'Material Grade' },
+                { key: 'estimated_length', label: 'Est. Length', unit: '"' },
+                { key: 'estimated_width', label: 'Est. Width', unit: '"' },
+                { key: 'estimated_height', label: 'Est. Height', unit: '"' },
+                { key: 'finishing_complexity', label: 'Finishing Complexity' },
+                { key: 'job_complexity', label: 'Job Complexity' },
+                { key: 'has_metalwork', label: 'Has Metalwork' },
+                { key: 'has_upholstery', label: 'Has Upholstery' },
+            ];
+
+            fields.forEach(field => {
+                if (result[field.key] !== undefined && result[field.key] !== null) {
+                    const item = document.createElement('div');
+                    item.className = 'analysis-item';
+
+                    const confidence = result[`${field.key}_confidence`] || result.overall_confidence || 'medium';
+                    const confidenceClass = confidence.toLowerCase();
+                    const confidenceLabel = confidence.charAt(0).toUpperCase() + confidence.slice(1);
+
+                    let displayValue = result[field.key];
+                    if (typeof displayValue === 'boolean') {
+                        displayValue = displayValue ? 'Yes' : 'No';
+                    }
+                    if (field.unit) {
+                        displayValue = displayValue + field.unit;
+                    }
+
+                    item.innerHTML = `
+                        <span class="label">${field.label}</span>
+                        <span>
+                            <span class="value">${displayValue}</span>
+                            <span class="confidence ${confidenceClass}">(${confidenceLabel})</span>
+                        </span>
+                    `;
+                    container.appendChild(item);
+                }
+            });
+
+            // Show description if available
+            if (result.description) {
+                description.textContent = result.description;
+                description.style.display = 'block';
+            } else {
+                description.style.display = 'none';
+            }
+
+            resultsDiv.classList.add('visible');
+        }
+
+        function applyAnalysisResults() {
+            if (!currentAnalysisResult) return;
+
+            const result = currentAnalysisResult;
+
+            // Apply project name/type
+            if (result.project_type) {
+                document.getElementById('project_name').value = result.project_type;
+                updateProjectImage();
+            }
+
+            // Apply wood species
+            if (result.wood_species) {
+                const speciesSelect = document.getElementById('wood_species');
+                const speciesMap = {
+                    'pine': 'Pine',
+                    'oak': 'Oak',
+                    'maple': 'Maple',
+                    'cherry': 'Cherry',
+                    'walnut': 'Walnut',
+                    'mdf': 'MDF',
+                    'plywood': 'Plywood',
+                };
+                const normalized = result.wood_species.toLowerCase();
+                for (const [key, value] of Object.entries(speciesMap)) {
+                    if (normalized.includes(key)) {
+                        speciesSelect.value = value;
+                        break;
+                    }
+                }
+            }
+
+            // Apply material grade
+            if (result.material_grade) {
+                const gradeSelect = document.getElementById('material_grade');
+                const gradeMap = {
+                    'economy': 'Economy',
+                    'standard': 'Standard',
+                    'premium': 'Premium',
+                };
+                const normalized = result.material_grade.toLowerCase();
+                for (const [key, value] of Object.entries(gradeMap)) {
+                    if (normalized.includes(key)) {
+                        gradeSelect.value = value;
+                        break;
+                    }
+                }
+            }
+
+            // Apply dimensions
+            if (result.estimated_length) {
+                document.getElementById('length_in').value = result.estimated_length;
+            }
+            if (result.estimated_width) {
+                document.getElementById('width_in').value = result.estimated_width;
+            }
+            if (result.estimated_height) {
+                document.getElementById('height_in').value = result.estimated_height;
+            }
+
+            // Apply complexity scores
+            if (result.finishing_complexity) {
+                document.getElementById('finishing_complexity').value = result.finishing_complexity;
+            }
+            if (result.job_complexity) {
+                document.getElementById('job_complexity_score').value = result.job_complexity;
+            }
+
+            // Apply work types
+            if (result.has_metalwork !== undefined) {
+                document.getElementById('has_metalwork').checked = result.has_metalwork;
+            }
+            if (result.has_upholstery !== undefined) {
+                document.getElementById('has_upholstery').checked = result.has_upholstery;
+            }
+            if (result.has_finishing !== undefined) {
+                document.getElementById('has_finishing').checked = result.has_finishing;
+            }
+
+            // Update previews
+            updateDimensionPreview();
+
+            // Scroll to form
+            document.getElementById('quoteForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Show confirmation
+            const resultsDiv = document.getElementById('analysisResults');
+            const originalContent = resultsDiv.innerHTML;
+            const confirmMsg = document.createElement('div');
+            confirmMsg.style.cssText = 'background: #e8f5e9; padding: 10px; border-radius: 4px; text-align: center; color: #2e7d32; margin-top: 10px;';
+            confirmMsg.textContent = 'Values applied to form!';
+            resultsDiv.appendChild(confirmMsg);
+
+            setTimeout(() => {
+                if (confirmMsg.parentNode) {
+                    confirmMsg.remove();
+                }
+            }, 3000);
+        }
+
+        // Clear photo button (optional - add to UI if needed)
+        function clearPhoto() {
+            currentPhotoData = null;
+            currentAnalysisResult = null;
+
+            document.getElementById('photoPreview').style.display = 'none';
+            document.getElementById('photoPreview').src = '';
+            document.getElementById('photoPlaceholder').style.display = 'flex';
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('analysisResults').classList.remove('visible');
+            document.getElementById('photoAnalysisSection').classList.remove('has-image');
+            document.getElementById('photoInput').value = '';
+        }
+
+        // ===== Manager Approval Workflow =====
+        let currentApprovalId = null;
+        let approvalPollInterval = null;
+        let currentManagerSuggestions = null;
+
+        function toggleApprovalSection() {
+            const toggle = document.getElementById('requiresApproval');
+            const submitBtn = document.getElementById('submitApprovalBtn');
+            const statusDiv = document.getElementById('approvalStatus');
+
+            if (toggle.checked) {
+                submitBtn.classList.add('visible');
+            } else {
+                submitBtn.classList.remove('visible');
+                statusDiv.classList.remove('visible');
+                if (approvalPollInterval) {
+                    clearInterval(approvalPollInterval);
+                    approvalPollInterval = null;
+                }
+            }
+        }
+
+        async function submitForApproval() {
+            const submitBtn = document.getElementById('submitApprovalBtn');
+            const statusDiv = document.getElementById('approvalStatus');
+
+            // Collect quote data for approval
+            const quoteData = {
+                project_name: document.getElementById('project_name').value,
+                customer_budget: document.getElementById('customer_budget').value,
+                competitor_quote: parseFloat(document.getElementById('competitor_quote').value) || null,
+                material_type: document.getElementById('material_type').value,
+                quality_level: document.getElementById('quality_level').value,
+                timeline_urgency: document.getElementById('timeline_urgency').value,
+                customer_type: document.getElementById('customer_type').value,
+                pricing_notes: document.getElementById('pricing_notes').value,
+                scope_clarifications: document.getElementById('scope_clarifications').value,
+                // Include key quote parameters
+                wood_species: document.getElementById('wood_species').value,
+                length_in: parseFloat(document.getElementById('length_in').value) || 0,
+                width_in: parseFloat(document.getElementById('width_in').value) || 0,
+                height_in: parseFloat(document.getElementById('height_in').value) || 0,
+                estimated_labor_hours: parseFloat(document.getElementById('estimated_labor_hours').value) || 0,
+            };
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="approval-spinner"></span> Submitting...';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/approvals/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(quoteData),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Submission failed: ${response.status}`);
+                }
+
+                const result = await response.json();
+                currentApprovalId = result.approval_id;
+
+                // Hide submit button, show status
+                submitBtn.classList.remove('visible');
+                showApprovalStatus('pending', 'Waiting for Manager Approval',
+                    'Your quote has been submitted for review. You will see updates here when a manager responds.');
+
+                // Start polling for approval status
+                startApprovalPolling();
+
+            } catch (err) {
+                console.error('Approval submission error:', err);
+                alert(`Failed to submit for approval: ${err.message}`);
+                submitBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                    Submit for Manager Approval
+                `;
+            } finally {
+                submitBtn.disabled = false;
+            }
+        }
+
+        function showApprovalStatus(status, title, message) {
+            const statusDiv = document.getElementById('approvalStatus');
+            const iconSpan = document.getElementById('approvalIcon');
+            const titleSpan = document.getElementById('approvalTitle');
+            const messageDiv = document.getElementById('approvalMessage');
+            const timestampDiv = document.getElementById('approvalTimestamp');
+            const cancelBtn = document.getElementById('cancelApprovalBtn');
+
+            // Remove previous status classes
+            statusDiv.classList.remove('pending', 'approved', 'rejected');
+            statusDiv.classList.add(status, 'visible');
+
+            // Set icon based on status
+            if (status === 'pending') {
+                iconSpan.innerHTML = '<span class="approval-spinner"></span>';
+                cancelBtn.style.display = 'block';
+            } else if (status === 'approved') {
+                iconSpan.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>`;
+                cancelBtn.style.display = 'none';
+            } else if (status === 'rejected') {
+                iconSpan.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#c62828" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>`;
+                cancelBtn.style.display = 'none';
+            }
+
+            titleSpan.textContent = title;
+            messageDiv.textContent = message;
+            timestampDiv.textContent = new Date().toLocaleString();
+        }
+
+        function startApprovalPolling() {
+            // Poll every 5 seconds for approval status
+            approvalPollInterval = setInterval(async () => {
+                if (!currentApprovalId) return;
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/v1/approvals/${currentApprovalId}`);
+                    if (!response.ok) return;
+
+                    const result = await response.json();
+
+                    if (result.status === 'approved') {
+                        clearInterval(approvalPollInterval);
+                        approvalPollInterval = null;
+                        handleApprovalResponse(result);
+                    } else if (result.status === 'rejected') {
+                        clearInterval(approvalPollInterval);
+                        approvalPollInterval = null;
+                        handleRejectionResponse(result);
+                    }
+                    // If still pending, continue polling
+                } catch (err) {
+                    console.error('Polling error:', err);
+                }
+            }, 5000);
+        }
+
+        function handleApprovalResponse(result) {
+            showApprovalStatus('approved', 'Quote Approved',
+                result.message || 'Your quote has been approved by management.');
+
+            // Show manager notes if provided
+            if (result.notes || result.suggested_adjustments) {
+                displayManagerNotes(result);
+            }
+        }
+
+        function handleRejectionResponse(result) {
+            showApprovalStatus('rejected', 'Changes Requested',
+                result.message || 'Management has requested changes to this quote.');
+
+            // Show manager notes
+            if (result.notes || result.suggested_adjustments) {
+                displayManagerNotes(result);
+            }
+        }
+
+        function displayManagerNotes(result) {
+            const container = document.getElementById('managerNotesContainer');
+            const notesText = document.getElementById('managerNotesText');
+            const adjustmentsDiv = document.getElementById('suggestedAdjustments');
+            const adjustmentsList = document.getElementById('adjustmentsList');
+            const applyBtn = document.getElementById('applyManagerNotesBtn');
+
+            container.style.display = 'block';
+            notesText.textContent = result.notes || 'No additional notes.';
+
+            // Show suggested adjustments if provided
+            if (result.suggested_adjustments && Object.keys(result.suggested_adjustments).length > 0) {
+                currentManagerSuggestions = result.suggested_adjustments;
+                adjustmentsDiv.style.display = 'block';
+                adjustmentsList.innerHTML = '';
+
+                const adjustmentLabels = {
+                    'discount_pct': 'Suggested Discount',
+                    'material_type': 'Material Type',
+                    'quality_level': 'Quality Level',
+                    'timeline_urgency': 'Timeline',
+                    'labor_adjustment_pct': 'Labor Adjustment',
+                    'price_ceiling': 'Maximum Price',
+                    'price_floor': 'Minimum Price',
+                };
+
+                for (const [key, value] of Object.entries(result.suggested_adjustments)) {
+                    const item = document.createElement('div');
+                    item.className = 'adjustment-item';
+                    const label = adjustmentLabels[key] || key.replace(/_/g, ' ');
+                    let displayValue = value;
+                    if (key.includes('pct')) {
+                        displayValue = `${value}%`;
+                    } else if (key.includes('price')) {
+                        displayValue = formatCurrency(value);
+                    }
+                    item.innerHTML = `
+                        <span class="label">${label}</span>
+                        <span class="value">${displayValue}</span>
+                    `;
+                    adjustmentsList.appendChild(item);
+                }
+
+                applyBtn.style.display = 'block';
+            } else {
+                adjustmentsDiv.style.display = 'none';
+                applyBtn.style.display = 'none';
+            }
+        }
+
+        function applyManagerSuggestions() {
+            if (!currentManagerSuggestions) return;
+
+            const suggestions = currentManagerSuggestions;
+
+            // Apply suggested changes to form
+            if (suggestions.material_type) {
+                document.getElementById('material_type').value = suggestions.material_type;
+            }
+            if (suggestions.quality_level) {
+                document.getElementById('quality_level').value = suggestions.quality_level;
+            }
+            if (suggestions.timeline_urgency) {
+                document.getElementById('timeline_urgency').value = suggestions.timeline_urgency;
+            }
+
+            // Show confirmation
+            const applyBtn = document.getElementById('applyManagerNotesBtn');
+            const originalText = applyBtn.textContent;
+            applyBtn.textContent = 'Adjustments Applied!';
+            applyBtn.style.background = 'linear-gradient(135deg, #27ae60, #219a52)';
+
+            setTimeout(() => {
+                applyBtn.textContent = originalText;
+                applyBtn.style.background = '';
+            }, 2000);
+
+            // Re-generate quote with new values
+            generateQuote();
+        }
+
+        async function cancelApprovalRequest() {
+            if (!currentApprovalId) return;
+
+            try {
+                await fetch(`${API_BASE}/api/v1/approvals/${currentApprovalId}/cancel`, {
+                    method: 'POST',
+                });
+            } catch (err) {
+                console.error('Cancel error:', err);
+            }
+
+            // Stop polling
+            if (approvalPollInterval) {
+                clearInterval(approvalPollInterval);
+                approvalPollInterval = null;
+            }
+
+            // Reset UI
+            currentApprovalId = null;
+            document.getElementById('approvalStatus').classList.remove('visible');
+            document.getElementById('submitApprovalBtn').classList.add('visible');
+            document.getElementById('submitApprovalBtn').innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Submit for Manager Approval
+            `;
+            document.getElementById('managerNotesContainer').style.display = 'none';
+        }
+
+        // Clean up polling on page unload
+        window.addEventListener('beforeunload', () => {
+            if (approvalPollInterval) {
+                clearInterval(approvalPollInterval);
+            }
+        });
+
+        // ===== Integrations Section =====
+        let currentQuoteResult = null;
+        let integrationsAvailable = false;
+
+        // Load integrations status on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadIntegrationsStatus();
+        });
+
+        async function loadIntegrationsStatus() {
+            const loading = document.getElementById('integrationsLoading');
+            const statusGrid = document.getElementById('integrationsStatus');
+
+            loading.style.display = 'flex';
+            statusGrid.style.display = 'none';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/integrations/status`);
+                if (!response.ok) throw new Error('Failed to load integrations');
+
+                const result = await response.json();
+                integrationsAvailable = result.available;
+                updateIntegrationStatuses(result.integrations);
+
+            } catch (err) {
+                console.error('Failed to load integrations:', err);
+                // Show default not-configured state
+                updateIntegrationStatuses({
+                    monday: { connected: false, error: 'API unavailable' },
+                    quickbooks: { connected: false, error: 'API unavailable' },
+                    tsheets: { connected: false, error: 'API unavailable' },
+                    gdrive: { connected: false, error: 'API unavailable' },
+                });
+            } finally {
+                loading.style.display = 'none';
+                statusGrid.style.display = 'grid';
+            }
+        }
+
+        function updateIntegrationStatuses(integrations) {
+            const statusMap = {
+                monday: 'mondayStatus',
+                quickbooks: 'quickbooksStatus',
+                tsheets: 'tsheetsStatus',
+                gdrive: 'gdriveStatus',
+            };
+
+            const itemMap = {
+                monday: 'integrationMonday',
+                quickbooks: 'integrationQuickBooks',
+                tsheets: 'integrationTSheets',
+                gdrive: 'integrationGDrive',
+            };
+
+            for (const [key, statusId] of Object.entries(statusMap)) {
+                const statusEl = document.getElementById(statusId);
+                const itemEl = document.getElementById(itemMap[key]);
+                const integration = integrations[key] || {};
+
+                const dot = statusEl.querySelector('.status-dot');
+                const text = statusEl.querySelector('.status-text');
+
+                if (integration.connected) {
+                    dot.className = 'status-dot connected';
+                    text.textContent = 'Connected';
+                    itemEl.classList.add('connected');
+                } else if (integration.error && integration.error !== 'Not configured') {
+                    dot.className = 'status-dot error';
+                    text.textContent = 'Error';
+                    itemEl.classList.remove('connected');
+                } else {
+                    dot.className = 'status-dot not-configured';
+                    text.textContent = 'Not Configured';
+                    itemEl.classList.remove('connected');
+                }
+            }
+        }
+
+        // Store quote result when generated
+        const originalDisplayResults = displayResults;
+        displayResults = function(result) {
+            currentQuoteResult = result;
+            originalDisplayResults(result);
+
+            // Show create project button if integrations available
+            const createSection = document.getElementById('createProjectSection');
+            if (createSection) {
+                createSection.style.display = 'block';
+            }
+        };
+
+        async function createProjectFromQuote() {
+            if (!currentQuoteResult) {
+                alert('Please generate a quote first.');
+                return;
+            }
+
+            const projectName = document.getElementById('project_name').value || 'New Project';
+            const customerName = prompt('Enter customer name:', '');
+            if (!customerName) return;
+
+            const createBtn = document.querySelector('.create-project-btn');
+            const originalContent = createBtn.innerHTML;
+            createBtn.innerHTML = '<span class="approval-spinner"></span> Creating project...';
+            createBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/integrations/project/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        quote_id: currentQuoteResult.quote_id || `Q-${Date.now()}`,
+                        customer_name: customerName,
+                        project_name: projectName,
+                        quote_result: currentQuoteResult,
+                    }),
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Failed to create project');
+                }
+
+                const result = await response.json();
+                showProjectCreationResult(result);
+
+            } catch (err) {
+                console.error('Project creation error:', err);
+                alert(`Failed to create project: ${err.message}`);
+            } finally {
+                createBtn.innerHTML = originalContent;
+                createBtn.disabled = false;
+            }
+        }
+
+        function showProjectCreationResult(result) {
+            let message = `Project "${result.project_name}" created!\n\n`;
+
+            for (const [system, status] of Object.entries(result.systems || {})) {
+                if (status.success) {
+                    message += `✓ ${system}: Created successfully\n`;
+                    if (status.board_url) message += `  Board: ${status.board_url}\n`;
+                    if (status.folder_url) message += `  Folder: ${status.folder_url}\n`;
+                } else {
+                    message += `✗ ${system}: ${status.error || 'Failed'}\n`;
+                }
+            }
+
+            alert(message);
+
+            // Refresh integrations status
+            loadIntegrationsStatus();
+        }
+    </script>
+</body>
+</html>
