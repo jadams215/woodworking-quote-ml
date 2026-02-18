@@ -4,9 +4,11 @@
     "MDF": 2.0,
     "Plywood": 4.0,
     "Oak": 8.0,
+    "White Oak": 9.5,
     "Maple": 9.0,
     "Cherry": 12.0,
     "Walnut": 15.0,
+    "Parota": 20.0,
     "Other": 6.0
   },
   "grade_multipliers": {

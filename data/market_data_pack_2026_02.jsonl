@@ -1,0 +1,58 @@
+# =========================
+# DATA PACK (2024–2026) — READY TO INGEST (JSONL)
+# Date generated: 2026-02-16 (America/New_York)
+# =========================
+
+# -------------------------
+# 1) LUMBER & SHEET GOODS PRICING
+# -------------------------
+{"dataset":"lumber_price","category":"softwood_framing","index_name":"Framing lumber price (MBF)","price_usd_per_mbf":903.14,"price_usd_per_bf":0.90314,"price_period":"2025-10","source":"Gordian (RSMeans) Lumber Price Updates","published_date":"2026-01-15","geo":"US","notes":"Reported as framing lumber price in Oct 2025."}
+{"dataset":"lumber_price","category":"hardwood_wholesale","species":"Walnut","thickness_quarters":4,"grade":"FAS","region":"Appalachian Area – Green","price_usd_per_mbf":3575,"price_usd_per_bf":3.575,"effective_date":"2026-02-16","source":"Hardwood Market Report (HMR)","notes":"HMR wholesale MBF figures."}
+{"dataset":"lumber_price","category":"hardwood_wholesale","species":"White Oak","thickness_quarters":4,"grade":"FAS","region":"Appalachian Area – Green","price_usd_per_mbf":2580,"price_usd_per_bf":2.58,"effective_date":"2026-02-16","source":"Hardwood Market Report (HMR)","notes":"HMR wholesale MBF figures."}
+{"dataset":"lumber_price","category":"hardwood_wholesale","species":"Hard Maple (Unselected)","thickness_quarters":4,"grade":"#1C","region":"Appalachian Area – Green","price_usd_per_mbf":1000,"price_usd_per_bf":1.0,"effective_date":"2026-02-16","source":"Hardwood Market Report (HMR)","notes":"HMR wholesale MBF figures."}
+{"dataset":"lumber_price","category":"hardwood_retail","seller":"Woodworkers Source","species":"Natural Walnut","thickness_quarters":4,"grade":"retail_listing","region":"US (online retail)","price_usd_per_bf_tier":"1-99_bdft","price_usd_per_bf":11.99,"effective_date":"2026-02-16","source":"Woodworkers Source product page","notes":"Retail snapshot."}
+{"dataset":"lumber_price","category":"hardwood_retail","seller":"Woodworkers Source","species":"Natural Walnut","thickness_quarters":4,"grade":"retail_listing","region":"US (online retail)","price_usd_per_bf_tier":"100+_bdft","price_usd_per_bf":8.99,"effective_date":"2026-02-16","source":"Woodworkers Source product page","notes":"Volume discount tier."}
+{"dataset":"lumber_price","category":"hardwood_retail","seller":"Bell Forest Products","species":"Walnut","thickness_quarters":4,"grade":"FAS/1F (Oak Rules) retail listing (S2S)","region":"US (online retail)","price_usd_per_bf_tier":"1-19_bf","price_usd_per_bf":13.75,"effective_date":"2026-02-16","source":"Bell Forest Products","notes":"Retail snapshot."}
+{"dataset":"lumber_price","category":"hardwood_retail","seller":"Bell Forest Products","species":"Walnut","thickness_quarters":4,"grade":"FAS/1F (Oak Rules) retail listing (S2S)","region":"US (online retail)","price_usd_per_bf_tier":"20-99_bf","price_usd_per_bf":12.40,"effective_date":"2026-02-16","source":"Bell Forest Products","notes":"Retail snapshot."}
+{"dataset":"lumber_price","category":"hardwood_retail","seller":"Bell Forest Products","species":"Walnut","thickness_quarters":4,"grade":"FAS/1F (Oak Rules) retail listing (S2S)","region":"US (online retail)","price_usd_per_bf_tier":"100+_bf","price_usd_per_bf":10.35,"effective_date":"2026-02-16","source":"Bell Forest Products","notes":"Retail snapshot."}
+
+# -------------------------
+# 2) LABOR RATE BENCHMARKS
+# -------------------------
+{"dataset":"labor_benchmark","source_type":"government","source":"BLS Occupational Outlook Handbook (Woodworkers)","role":"Cabinetmakers and bench carpenters","soc":"51-7011","wage_basis":"median_annual","wage_usd":46020,"effective_period":"2024-05","geo":"US","notes":"National baseline."}
+{"dataset":"labor_benchmark","source_type":"government","source":"BLS Occupational Outlook Handbook (Woodworkers)","role":"Sawing machine setters/operators/tenders, wood","soc":"51-7041","wage_basis":"median_annual","wage_usd":39950,"effective_period":"2024-05","geo":"US","notes":"Maps to shop saw operators."}
+{"dataset":"labor_benchmark","source_type":"government","source":"BLS Occupational Outlook Handbook (Woodworkers)","role":"Woodworking machine setters/operators/tenders, except sawing","soc":"51-7042","wage_basis":"median_annual","wage_usd":40440,"effective_period":"2024-05","geo":"US","notes":"CNC operator proxy."}
+{"dataset":"labor_benchmark","source_type":"government","source":"CareerOneStop (BLS-backed wage tables)","role":"Cabinetmakers and Bench Carpenters","soc":"51-7011","wage_basis":"hourly_percentiles","geo":"Atlanta-Sandy Springs-Roswell, GA","p25_usd_per_hr":14.98,"p50_usd_per_hr":21.67,"p75_usd_per_hr":28.55,"effective_period":"2024-05","notes":"Atlanta metro area percentiles."}
+{"dataset":"labor_burden","category":"construction","source":"BLS ECEC-based summary (ConstructionCoverage)","industry":"Construction","wage_usd_per_year":69950,"burden_usd_per_year":30930,"burden_pct_of_wages":0.44,"effective_period":"2024-12","notes":"Burden multiplier: 1.44x wages."}
+
+# -------------------------
+# 3) FINISHING & COATING COSTS
+# -------------------------
+{"dataset":"finish_cost_benchmark","category":"powder_coating","process":"powder_coating","pricing_basis":"per_sqft_range","low_usd_per_sqft":1.50,"high_usd_per_sqft":7.00,"effective_date":"2025-11-23","source":"Angi powder coating cost article","notes":"Per sq ft benchmark range."}
+{"dataset":"finish_cost_benchmark","category":"powder_coating","process":"powder_coating","pricing_basis":"per_item_average","avg_usd_per_item":755,"range_low_usd_per_item":180,"range_high_usd_per_item":2400,"effective_date":"2025-06-22","source":"HomeAdvisor powder coating cost article","notes":"Per-item pricing."}
+
+# -------------------------
+# 4) HARDWARE PRICING
+# -------------------------
+{"dataset":"hardware_price","category":"drawer_slides","vendor":"CabinetParts.com","brand":"Blum","item":"Tandem 563H undermount slide (soft-close)","sku":"563H3050B","uom":"each","price_usd":23.37,"effective_date":"2026-02-16","source":"CabinetParts.com product page","notes":"Retail price."}
+{"dataset":"hardware_price","category":"drawer_slides","vendor":"CabinetParts.com","brand":"Blum","item":"Tandem 563H undermount slide (soft-close)","sku":"563H3050B","uom":"each (volume)","price_usd":22.20,"min_qty":6,"effective_date":"2026-02-16","source":"CabinetParts.com product page","notes":"Volume tier."}
+
+# -------------------------
+# 5) DELIVERY & FREIGHT
+# -------------------------
+{"dataset":"freight_rate","category":"dry_van","source":"DAT (Freight Talk blog)","equipment":"dry_van","rate_type":"spot_linehaul","avg_usd_per_mile":1.89,"effective_date":"2025-12-16","geo":"US (national)","notes":"National spot rate."}
+{"dataset":"fuel_price_index","category":"diesel_retail","source":"EIA weekly retail on-highway diesel (U.S.)","series":"U.S. No 2 Diesel Retail Prices ($/gal)","date":"2026-02-09","price_usd_per_gal":3.688,"geo":"US","notes":"Weekly value."}
+{"dataset":"fuel_price_index","category":"diesel_retail","source":"EIA weekly retail on-highway diesel (U.S.)","series":"U.S. No 2 Diesel Retail Prices ($/gal)","date":"2026-02-02","price_usd_per_gal":3.681,"geo":"US","notes":"Lag feature."}
+{"dataset":"fuel_price_index","category":"diesel_retail","source":"EIA weekly retail on-highway diesel (U.S.)","series":"U.S. No 2 Diesel Retail Prices ($/gal)","date":"2026-01-26","price_usd_per_gal":3.624,"geo":"US","notes":"Lag feature."}
+
+# -------------------------
+# 6) CONSTRUCTION DEMAND SIGNAL
+# -------------------------
+{"dataset":"construction_demand_signal","category":"nonresidential","source":"Dodge Construction Network","metric":"Dodge Momentum Index (DMI)","period":"2025-12","dmi_value":296.8,"baseline":"2000=100","mom_change_pct":7.0,"yoy_context":"2025 average up 37% vs 2024","effective_date":"2025-12-01","notes":"Nonresidential planning signal."}
+{"dataset":"construction_demand_signal","category":"nonresidential","source":"Dodge Construction Network","metric":"Dodge Momentum Index (DMI)","period":"2026-01","dmi_value":272.7,"baseline":"2000=100","mom_change_pct":-6.3,"effective_date":"2026-01-01","notes":"Nonresidential planning levels off."}
+
+# -------------------------
+# 7) SUBCONTRACTOR BENCHMARKS
+# -------------------------
+{"dataset":"subcontractor_benchmark","category":"cnc_router","trade":"CNC_router_shop_time","pricing_basis":"per_hour_range","low_usd_per_hr":60,"high_usd_per_hr":150,"effective_date":"2025-04-30","source":"East Nashville CNC blog (2025 guide)","notes":"Public benchmark range."}
+{"dataset":"subcontractor_benchmark","category":"cnc_router","trade":"CNC_router_shop_time","pricing_basis":"shop_specific_flat_rate","usd_per_hr":75,"effective_date":"2025-04-30","source":"East Nashville CNC blog (2025 guide)","notes":"Example shop-specific rate."}

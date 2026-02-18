@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quote {{ quote_number }}</title>
+    <style>
+        @page {
+            size: letter;
+            margin: 0.75in;
+        }
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: #333;
+        }
+        .header {
+            margin-bottom: 1.5em;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5em;
+        }
+        .company-name {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.2em;
+        }
+        .company-info {
+            font-size: 9pt;
+            color: #666;
+        }
+        .quote-title {
+            font-size: 14pt;
+            font-weight: bold;
+            margin: 1em 0 0.5em 0;
+        }
+        .quote-meta {
+            display: table;
+            width: 100%;
+            margin-bottom: 1.5em;
+        }
+        .meta-row {
+            display: table-row;
+        }
+        .meta-label {
+            display: table-cell;
+            width: 30%;
+            font-weight: bold;
+            padding: 0.2em 0;
+        }
+        .meta-value {
+            display: table-cell;
+            padding: 0.2em 0;
+        }
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin: 1.5em 0 0.5em 0;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.3em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+        th {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 0.5em;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            border: 1px solid #ccc;
+            padding: 0.5em;
+        }
+        .amount {
+            text-align: right;
+            font-family: monospace;
+        }
+        .tier-box {
+            display: inline-block;
+            width: 30%;
+            margin: 0.5em 1.5% 0.5em 0;
+            padding: 0.8em;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            vertical-align: top;
+        }
+        .tier-box.selected {
+            border-color: #007bff;
+            background-color: #f0f8ff;
+        }
+        .tier-name {
+            font-weight: bold;
+            font-size: 11pt;
+            margin-bottom: 0.3em;
+        }
+        .tier-price {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .tier-margin {
+            font-size: 8pt;
+            color: #666;
+        }
+        .total-row {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+        .confidence {
+            display: inline-block;
+            padding: 0.3em 0.6em;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+        .confidence-high {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .confidence-medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .confidence-low {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .risk-flag {
+            display: inline-block;
+            padding: 0.2em 0.5em;
+            margin: 0.2em;
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 3px;
+            font-size: 8pt;
+        }
+        .footer {
+            margin-top: 2em;
+            padding-top: 1em;
+            border-top: 1px solid #ccc;
+            font-size: 8pt;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="company-name">B10 Union, LLC</div>
+        <div class="company-info">
+            Custom Furniture & Fabrication<br>
+            1081 Memorial Dr SE, Atlanta, GA 30316<br>
+            Phone: 508.942.8541 | Email: info@b-10union.com<br>
+            Mon-Fri, 9:00 AM–5:00 PM
+        </div>
+    </div>
+
+    <div class="quote-title">QUOTATION</div>
+
+    <div class="quote-meta">
+        <div class="meta-row">
+            <div class="meta-label">Quote Number:</div>
+            <div class="meta-value">{{ quote_number }}</div>
+        </div>
+        <div class="meta-row">
+            <div class="meta-label">Date:</div>
+            <div class="meta-value">{{ date }}</div>
+        </div>
+        <div class="meta-row">
+            <div class="meta-label">Valid Until:</div>
+            <div class="meta-value">{{ expires_at }}</div>
+        </div>
+        <div class="meta-row">
+            <div class="meta-label">Customer:</div>
+            <div class="meta-value">{{ customer_name }}</div>
+        </div>
+        {% if customer_email %}
+        <div class="meta-row">
+            <div class="meta-label">Email:</div>
+            <div class="meta-value">{{ customer_email }}</div>
+        </div>
+        {% endif %}
+        {% if customer_phone %}
+        <div class="meta-row">
+            <div class="meta-label">Phone:</div>
+            <div class="meta-value">{{ customer_phone }}</div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="section-title">Pricing Options</div>
+    <div>
+        <div class="tier-box {% if selected_tier == 'low' %}selected{% endif %}">
+            <div class="tier-name">Economy</div>
+            <div class="tier-price">${{ tier_low_price }}</div>
+            <div class="tier-margin">15% margin</div>
+        </div>
+        <div class="tier-box {% if selected_tier == 'standard' %}selected{% endif %}">
+            <div class="tier-name">Standard</div>
+            <div class="tier-price">${{ tier_standard_price }}</div>
+            <div class="tier-margin">25% margin</div>
+        </div>
+        <div class="tier-box {% if selected_tier == 'premium' %}selected{% endif %}">
+            <div class="tier-name">Premium</div>
+            <div class="tier-price">${{ tier_premium_price }}</div>
+            <div class="tier-margin">35% margin</div>
+        </div>
+    </div>
+
+    <div class="section-title">Cost Breakdown</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th class="amount">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Materials</td>
+                <td class="amount">${{ material_cost }}</td>
+            </tr>
+            <tr>
+                <td>Labor</td>
+                <td class="amount">${{ labor_cost }}</td>
+            </tr>
+            {% if finishing_cost > 0 %}
+            <tr>
+                <td>Finishing</td>
+                <td class="amount">${{ finishing_cost }}</td>
+            </tr>
+            {% endif %}
+            {% if hardware_cost > 0 %}
+            <tr>
+                <td>Hardware</td>
+                <td class="amount">${{ hardware_cost }}</td>
+            </tr>
+            {% endif %}
+            {% if delivery_cost > 0 %}
+            <tr>
+                <td>Delivery</td>
+                <td class="amount">${{ delivery_cost }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>Overhead</td>
+                <td class="amount">${{ overhead }}</td>
+            </tr>
+            {% if risk_adjustment > 0 %}
+            <tr>
+                <td>Risk Adjustment</td>
+                <td class="amount">${{ risk_adjustment }}</td>
+            </tr>
+            {% endif %}
+            <tr class="total-row">
+                <td>Total Cost</td>
+                <td class="amount">${{ total_cost }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Quote Details</div>
+    <p>
+        <strong>Material:</strong> {{ material_species }} ({{ material_grade }})<br>
+        <strong>Quantity:</strong> {{ quantity }}<br>
+        <strong>Confidence:</strong>
+        <span class="confidence {% if confidence_score >= 80 %}confidence-high{% elif confidence_score >= 60 %}confidence-medium{% else %}confidence-low{% endif %}">
+            {{ confidence_score }}%
+        </span>
+    </p>
+
+    {% if risk_flags %}
+    <p>
+        <strong>Risk Factors:</strong><br>
+        {% for flag in risk_flags %}
+        <span class="risk-flag">{{ flag }}</span>
+        {% endfor %}
+    </p>
+    {% endif %}
+
+    {% if notes %}
+    <p>
+        <strong>Notes:</strong><br>
+        {{ notes }}
+    </p>
+    {% endif %}
+
+    <div class="footer">
+        <p>
+            <strong>Terms & Conditions:</strong><br>
+            • All furniture is handmade by our team of craftspeople in Atlanta, GA<br>
+            • Nationwide delivery available via freight carrier<br>
+            • Custom finishes require sample approval before production begins<br>
+            • Installation services available for built-in projects<br>
+            • 50% deposit required to begin work, balance due upon completion<br>
+            • This quote is valid for 30 days from the date above<br>
+            • Prices subject to change based on material availability and market conditions
+        </p>
+        <p>
+            Quote ID: {{ quote_id }} | Generated: {{ generated_at }}
+        </p>
+    </div>
+</body>
+</html>
